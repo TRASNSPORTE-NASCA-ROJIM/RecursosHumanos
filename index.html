@@ -3,96 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard RRHH - Indicadores</title>
+<title>Dashboard RRHH — Transporte Rojim S.R.L.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#f0f2f8;--card:#fff;--primary:#6C2BD9;--primary-light:#8B5CF6;--primary-dark:#4C1D95;
---accent:#E11D48;--accent-light:#FB7185;--accent2:#F59E0B;--accent3:#10B981;--accent4:#3B82F6;
---text:#1E1B4B;--text-secondary:#64748B;--border:#E2E8F0;
---gradient:linear-gradient(135deg,#6C2BD9 0%,#E11D48 100%);
---shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
---shadow-lg:0 4px 20px rgba(108,43,217,.12);
+  --bg:#f0f2f8;--card:#fff;--primary:#6C2BD9;--primary-light:#8B5CF6;--primary-dark:#4C1D95;
+  --accent:#E11D48;--accent-light:#FB7185;--accent2:#F59E0B;--accent3:#10B981;--accent4:#3B82F6;
+  --text:#1E1B4B;--text-secondary:#64748B;--border:#E2E8F0;
+  --gradient:linear-gradient(135deg,#6C2BD9 0%,#E11D48 100%);
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
+  --shadow-lg:0 4px 20px rgba(108,43,217,.12);
 }
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 .layout{display:flex;min-height:100vh}
 .sidebar{width:240px;background:var(--gradient);color:#fff;padding:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto}
 .sidebar-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.15)}
-.sidebar-header h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;letter-spacing:.5px;opacity:.9}
-.sidebar-header .company{font-size:20px;font-weight:700;margin-top:4px}
-.sidebar-profile{padding:24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.12)}
-.profile-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;border:2px solid rgba(255,255,255,.3)}
+.sidebar-header h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;letter-spacing:.5px;opacity:.9;text-transform:uppercase}
+.sidebar-header .company{font-size:18px;font-weight:700;margin-top:4px;line-height:1.2}
+.sidebar-profile{padding:20px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.12)}
+.profile-avatar{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.2);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid rgba(255,255,255,.3)}
 .profile-name{font-size:13px;font-weight:600;opacity:.9}
 .profile-role{font-size:11px;opacity:.6;margin-top:2px}
-.sidebar-stats{padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.12)}
-.stat-box{background:rgba(255,255,255,.12);border-radius:10px;padding:12px;text-align:center;margin-bottom:8px}
-.stat-box .val{font-size:22px;font-weight:700}
-.stat-box .lbl{font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.sidebar-nav{padding:16px 12px;flex:1}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;margin-bottom:3px;opacity:.75}
+.sidebar-stats{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-box{background:rgba(255,255,255,.12);border-radius:10px;padding:10px 8px;text-align:center}
+.stat-box .val{font-size:20px;font-weight:700}
+.stat-box .lbl{font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.sidebar-nav{padding:14px 12px;flex:1}
+.nav-section{font-size:9px;text-transform:uppercase;letter-spacing:.8px;opacity:.5;padding:8px 14px 4px;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;margin-bottom:2px;opacity:.75}
 .nav-item:hover{background:rgba(255,255,255,.12);opacity:1}
 .nav-item.active{background:rgba(255,255,255,.2);opacity:1;font-weight:600}
-.nav-item .icon{width:20px;text-align:center;font-size:15px}
+.nav-item .icon{width:20px;text-align:center;font-size:14px}
 .nav-item .badge{margin-left:auto;background:rgba(255,255,255,.25);padding:2px 7px;border-radius:8px;font-size:10px;font-weight:600}
 .main{margin-left:240px;flex:1;padding:24px 28px 40px}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.topbar h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:var(--primary-dark)}
+.topbar h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:var(--primary-dark)}
+.topbar-right{display:flex;align-items:center;gap:10px}
 .topbar .date{font-size:13px;color:var(--text-secondary);background:var(--card);padding:8px 16px;border-radius:10px;box-shadow:var(--shadow);font-weight:500}
+.btn-edit-mode{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:8px 16px;border-radius:10px;border:2px solid var(--primary);color:var(--primary);background:#fff;cursor:pointer;transition:.2s}
+.btn-edit-mode:hover,.btn-edit-mode.on{background:var(--primary);color:#fff}
 .tab-content{display:none}.tab-content.active{display:block}
 /* CARDS */
-.cards-grid{display:grid;gap:16px;margin-bottom:24px;grid-auto-rows:1fr}
+.cards-grid{display:grid;gap:16px;margin-bottom:24px}
 .cards-4{grid-template-columns:repeat(4,1fr)}
 .cards-3{grid-template-columns:repeat(3,1fr)}
 .cards-2{grid-template-columns:repeat(2,1fr)}
-.kpi-card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;min-height:140px;display:flex;flex-direction:column;justify-content:center}
+.kpi-card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;min-height:130px;display:flex;flex-direction:column;justify-content:center}
 .kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi-card.purple::before{background:var(--primary)}
-.kpi-card.red::before{background:var(--accent)}
-.kpi-card.amber::before{background:var(--accent2)}
-.kpi-card.green::before{background:var(--accent3)}
+.kpi-card.purple::before{background:var(--primary)}.kpi-card.red::before{background:var(--accent)}
+.kpi-card.amber::before{background:var(--accent2)}.kpi-card.green::before{background:var(--accent3)}
 .kpi-card.blue::before{background:var(--accent4)}
-.kpi-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
-.kpi-icon.purple{background:#EDE9FE;color:var(--primary)}
-.kpi-icon.red{background:#FFE4E6;color:var(--accent)}
-.kpi-icon.amber{background:#FEF3C7;color:#D97706}
-.kpi-icon.green{background:#D1FAE5;color:#059669}
+.kpi-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
+.kpi-icon.purple{background:#EDE9FE;color:var(--primary)}.kpi-icon.red{background:#FFE4E6;color:var(--accent)}
+.kpi-icon.amber{background:#FEF3C7;color:#D97706}.kpi-icon.green{background:#D1FAE5;color:#059669}
 .kpi-icon.blue{background:#DBEAFE;color:#2563EB}
 .kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);font-weight:600;margin-bottom:4px}
-.kpi-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;color:var(--text)}
+.kpi-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:var(--text)}
 .kpi-sub{font-size:11px;color:var(--text-secondary);margin-top:4px}
-/* CHART PANELS */
-.panel{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;min-height:0}
+/* PANELS */
+.panel{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
 .panel-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.panel-title .dot{width:8px;height:8px;border-radius:50%}
+.panel-title .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.panel-title small{font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:auto}
 .row{display:grid;gap:16px;margin-bottom:16px;align-items:start}
 .row-2{grid-template-columns:1fr 1fr}
 .row-3{grid-template-columns:1fr 1fr 1fr}
 .row-7-3{grid-template-columns:7fr 3fr}
 .row-6-4{grid-template-columns:6fr 4fr}
+.row-5-5{grid-template-columns:1fr 1fr}
 .row>.panel{height:360px;display:flex;flex-direction:column;overflow:hidden}
 .row>.panel .chart-box,.row>.panel .chart-box-sm{flex:1;min-height:0}
-.panel.panel-table{height:auto!important}
+.panel.auto{height:auto!important}
+/* CHART BOXES */
+.chart-box{position:relative;width:100%;height:260px}
+.chart-box-sm{position:relative;width:100%;height:220px}
+.chart-box canvas,.chart-box-sm canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
 /* TABLE */
-.tbl-wrap{overflow-x:auto;max-height:500px;overflow-y:auto}
+.tbl-wrap{overflow-x:auto;max-height:480px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:12px}
 thead{position:sticky;top:0;z-index:2}
 th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.3px}
 td{padding:8px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
 tr:hover td{background:#F8FAFC}
 tr:nth-child(even) td{background:#FAFBFE}
-.badge-sm{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
-.badge-green{background:#D1FAE5;color:#065F46}
-.badge-red{background:#FFE4E6;color:#9F1239}
-.badge-amber{background:#FEF3C7;color:#92400E}
-.badge-blue{background:#DBEAFE;color:#1E40AF}
-.badge-purple{background:#EDE9FE;color:#5B21B6}
+.badge-sm{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700}
+.badge-green{background:#D1FAE5;color:#065F46}.badge-red{background:#FFE4E6;color:#9F1239}
+.badge-amber{background:#FEF3C7;color:#92400E}.badge-blue{background:#DBEAFE;color:#1E40AF}
+.badge-purple{background:#EDE9FE;color:#5B21B6}.badge-gray{background:#F1F5F9;color:#475569}
 /* GAUGE */
-.gauge-container{display:flex;flex-direction:column;align-items:center;padding:16px}
-.gauge-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:800;margin-top:8px}
-.gauge-label{font-size:12px;color:var(--text-secondary);margin-top:4px}
+.gauge-container{display:flex;flex-direction:column;align-items:center;padding:12px 0}
+.gauge-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;margin-top:6px}
+.gauge-label{font-size:12px;color:var(--text-secondary);margin-top:4px;font-weight:500}
 /* PROGRESS */
 .progress-bar{height:8px;background:#E2E8F0;border-radius:8px;overflow:hidden;margin-top:6px}
 .progress-fill{height:100%;border-radius:8px;transition:width .6s ease}
@@ -100,27 +104,54 @@ tr:nth-child(even) td{background:#FAFBFE}
 .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary)}
 .legend-dot{width:10px;height:10px;border-radius:3px}
-/* INDICATOR CARD */
+/* INDICATOR BIG */
 .ind-card{background:var(--card);border-radius:14px;padding:24px;box-shadow:var(--shadow);text-align:center}
-.ind-card .ind-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;font-weight:800;margin:12px 0 4px}
+.ind-card .ind-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:800;margin:8px 0 4px}
 .ind-card .ind-lbl{font-size:12px;color:var(--text-secondary);font-weight:500}
 .ind-card .ind-formula{font-size:10px;color:var(--text-secondary);margin-top:8px;opacity:.7;font-style:italic}
-/* FIXED CHART CONTAINERS */
-.chart-box{position:relative;width:100%;height:280px}
-.chart-box-sm{position:relative;width:100%;height:240px}
-.chart-box canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
-.chart-box-sm canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
-.kpi-card .kpi-value{font-size:22px}
+/* META BADGE */
+.meta-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.meta-row:last-child{border:none}
+.meta-name{font-size:13px;font-weight:500}
+.meta-pct{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800}
+/* EDITABLE */
+[contenteditable=true]{outline:none;background:rgba(108,43,217,.07);border-radius:4px;padding:1px 4px;cursor:text}
+[contenteditable=true]:focus{background:rgba(108,43,217,.15);outline:2px solid var(--primary);outline-offset:1px}
+/* EDIT INDICATOR */
+.edit-mode-banner{display:none;background:#EDE9FE;border:1px solid #8B5CF6;border-radius:10px;padding:8px 16px;font-size:12px;color:#4C1D95;font-weight:600;margin-bottom:16px}
+.edit-mode-banner.show{display:block}
+/* ASIS PER PERSON */
+.asis-person-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.asis-person-card{background:#F8FAFC;border-radius:10px;padding:12px;border:1px solid var(--border)}
+.asis-person-name{font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.asis-mini-bars{display:flex;flex-direction:column;gap:3px}
+.asis-mini-row{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-secondary)}
+.asis-mini-bar{flex:1;height:4px;background:#E2E8F0;border-radius:2px;overflow:hidden}
+.asis-mini-fill{height:100%;border-radius:2px}
+/* MEDIDOR SEMAFORO */
+.semaforo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.semaforo-card{border-radius:12px;padding:16px;text-align:center}
+.semaforo-card.verde{background:#D1FAE5;border:1px solid #6EE7B7}
+.semaforo-card.amarillo{background:#FEF3C7;border:1px solid #FDE68A}
+.semaforo-card.rojo{background:#FFE4E6;border:1px solid #FCA5A5}
+.semaforo-pct{font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800}
+.semaforo-pct.verde{color:#065F46}.semaforo-pct.amarillo{color:#92400E}.semaforo-pct.rojo{color:#9F1239}
+.semaforo-lbl{font-size:11px;font-weight:600;margin-top:4px}
+.semaforo-lbl.verde{color:#065F46}.semaforo-lbl.amarillo{color:#92400E}.semaforo-lbl.rojo{color:#9F1239}
+.semaforo-n{font-size:10px;color:var(--text-secondary);margin-top:2px}
 @media(max-width:1200px){.cards-4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.sidebar{width:200px}.main{margin-left:200px}.cards-4,.cards-3{grid-template-columns:1fr 1fr}.row-2,.row-3,.row-7-3,.row-6-4{grid-template-columns:1fr}}
+@media print{.sidebar{display:none!important}.main{margin-left:0!important}.btn-edit-mode{display:none}}
 </style>
 </head>
 <body>
 <div class="layout">
+
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-header">
-    <h2>GESTIÓN RRHH</h2>
-    <div class="company">Dashboard 2026</div>
+    <h2>🚛 Gestión RRHH</h2>
+    <div class="company">Transporte Rojim S.R.L.</div>
   </div>
   <div class="sidebar-profile">
     <div class="profile-avatar">👤</div>
@@ -129,484 +160,675 @@ tr:nth-child(even) td{background:#FAFBFE}
   </div>
   <div class="sidebar-stats">
     <div class="stat-box"><div class="val">33</div><div class="lbl">Trabajadores</div></div>
+    <div class="stat-box"><div class="val">98.7%</div><div class="lbl">Índice RRHH</div></div>
+    <div class="stat-box"><div class="val">30</div><div class="lbl">Vigentes</div></div>
+    <div class="stat-box"><div class="val">Mar</div><div class="lbl">Período</div></div>
   </div>
   <nav class="sidebar-nav" id="sideNav">
-    <div class="nav-item active" data-tab="tab-data"><span class="icon">📋</span>Data Trabajadores</div>
-    <div class="nav-item" data-tab="tab-planilla"><span class="icon">💰</span>Planilla</div>
-    <div class="nav-item" data-tab="tab-clima"><span class="icon">🌡️</span>Clima Laboral</div>
-    <div class="nav-item" data-tab="tab-desempeno"><span class="icon">⭐</span>Eval. Desempeño</div>
-    <div class="nav-item" data-tab="tab-rotacion"><span class="icon">🔄</span>Rotación</div>
-    <div class="nav-item" data-tab="tab-capacitaciones"><span class="icon">📚</span>Capacitaciones</div>
+    <div class="nav-section">General</div>
+    <div class="nav-item active" data-tab="tab-resumen"><span class="icon">📊</span>Resumen General</div>
+    <div class="nav-item" data-tab="tab-data"><span class="icon">📋</span>Data Trabajadores</div>
+    <div class="nav-item" data-tab="tab-planilla"><span class="icon">💰</span>Planilla Marzo</div>
+    <div class="nav-section">Indicadores</div>
+    <div class="nav-item" data-tab="tab-clima"><span class="icon">🌡️</span>Clima Laboral <span class="badge">85.8%</span></div>
+    <div class="nav-item" data-tab="tab-desempeno"><span class="icon">⭐</span>Eval. Desempeño <span class="badge">93.6%</span></div>
+    <div class="nav-item" data-tab="tab-rotacion"><span class="icon">🔄</span>Rotación <span class="badge">4.1%</span></div>
+    <div class="nav-item" data-tab="tab-capacitaciones"><span class="icon">📚</span>Capacitaciones <span class="badge">100%</span></div>
     <div class="nav-item" data-tab="tab-contratos"><span class="icon">📝</span>Contratos</div>
     <div class="nav-item" data-tab="tab-asistencia"><span class="icon">⏰</span>Asistencia</div>
   </nav>
 </aside>
 
+<!-- MAIN -->
 <main class="main">
 <div class="topbar">
-  <h1 id="pageTitle">Data de Trabajadores</h1>
-  <div class="date">📅 Marzo 2026</div>
+  <h1 id="pageTitle">Resumen General</h1>
+  <div class="topbar-right">
+    <button class="btn-edit-mode" id="editBtn" onclick="toggleEdit()">✏️ Editar valores</button>
+    <div class="date">📅 Marzo 2026 — Nazca, Ica</div>
+  </div>
+</div>
+<div class="edit-mode-banner" id="editBanner">✏️ Modo edición activo — Haz clic en cualquier valor para modificarlo. Los indicadores se recalculan automáticamente.</div>
+
+<!-- ======== TAB: RESUMEN ======== -->
+<div class="tab-content active" id="tab-resumen">
+  <div class="cards-grid cards-4" id="resumenKPIs"></div>
+  <div class="row row-2">
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Indicadores Estratégicos — Meta vs Resultado</div>
+      <div id="resumenIndicadores"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Radar de Cumplimiento</div>
+      <div class="chart-box"><canvas id="chartRadar"></canvas></div>
+    </div>
+  </div>
+  <div class="row row-3">
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Personal por Área</div>
+      <div class="chart-box-sm"><canvas id="chartAreaPie"></canvas></div>
+    </div>
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Género</div>
+      <div class="chart-box-sm"><canvas id="chartGeneroRes"></canvas></div>
+    </div>
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--accent)"></span>Distribución Planilla</div>
+      <div class="chart-box-sm"><canvas id="chartPlanRes"></canvas></div>
+    </div>
+  </div>
 </div>
 
-<!-- TAB: DATA TRABAJADORES -->
-<div class="tab-content active" id="tab-data">
+<!-- ======== TAB: DATA TRABAJADORES ======== -->
+<div class="tab-content" id="tab-data">
   <div class="cards-grid cards-4" id="dataKPIs"></div>
   <div class="row row-7-3">
     <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Distribución por Cargo</div><div class="chart-box"><canvas id="chartCargo"></canvas></div></div>
     <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent)"></span>Género</div><div class="chart-box-sm"><canvas id="chartGenero"></canvas></div></div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Listado de Trabajadores</div><div class="tbl-wrap" id="tblTrabajadores"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Listado de Trabajadores <small>33 registros activos</small></div><div class="tbl-wrap" id="tblTrabajadores"></div></div>
 </div>
 
-<!-- TAB: PLANILLA -->
+<!-- ======== TAB: PLANILLA ======== -->
 <div class="tab-content" id="tab-planilla">
   <div class="cards-grid cards-4" id="planillaKPIs"></div>
   <div class="row row-6-4">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Distribución de Costos Mensuales</div><div class="chart-box"><canvas id="chartPlanillaDist"></canvas></div></div>
+    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Bruto vs Neto — Top 12</div><div class="chart-box"><canvas id="chartPlanillaDist"></canvas></div></div>
     <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Composición Planilla</div><div class="chart-box-sm"><canvas id="chartPlanillaPie"></canvas></div></div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle de Planilla - Marzo 2026</div><div class="tbl-wrap" id="tblPlanilla"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle Planilla — Marzo 2026 <small>33 trabajadores</small></div><div class="tbl-wrap" id="tblPlanilla"></div></div>
 </div>
 
-<!-- TAB: CLIMA LABORAL -->
+<!-- ======== TAB: CLIMA ======== -->
 <div class="tab-content" id="tab-clima">
   <div class="cards-grid cards-3" id="climaKPIs"></div>
   <div class="row row-2">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Evolución Clima Laboral (Promedio Mensual)</div><div class="chart-box"><canvas id="chartClima"></canvas></div></div>
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Resultados por Pregunta (Promedio Anual)</div><div class="chart-box-sm"><canvas id="chartClimaRadar"></canvas></div></div>
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Indicador de Clima Laboral — Marzo 2026</div>
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <div class="gauge-container">
+          <canvas id="gaugeClima" width="200" height="110"></canvas>
+          <div class="gauge-value" id="climaGaugeVal" style="color:var(--accent3)">85.8%</div>
+          <div class="gauge-label">Clima Laboral (Mar)</div>
+        </div>
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:12px;color:var(--text-secondary);font-weight:600;margin-bottom:10px">POR ÁREA</div>
+          <div id="climaBarras"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Radar por Pregunta (Promedio)</div>
+      <div class="chart-box"><canvas id="chartClimaRadar"></canvas></div>
+    </div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Detalle Encuestas Mensuales</div><div class="tbl-wrap" id="tblClima"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Detalle Encuestas — Marzo 2026 <small>11 encuestas anónimas</small></div><div class="tbl-wrap" id="tblClima"></div></div>
 </div>
 
-<!-- TAB: EVALUACION DESEMPEÑO -->
+<!-- ======== TAB: DESEMPEÑO ======== -->
 <div class="tab-content" id="tab-desempeno">
   <div class="cards-grid cards-4" id="desempenoKPIs"></div>
   <div class="row row-2">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>% Evaluados por Mes</div><div class="chart-box"><canvas id="chartDesempeno"></canvas></div></div>
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Distribución de Calificaciones</div><div class="chart-box-sm"><canvas id="chartDesempenoDist"></canvas></div></div>
+    <div class="panel">
+      <div class="panel-title"><span class="dot" style="background:var(--primary)"></span>% Desempeño por Trabajador</div>
+      <div class="chart-box"><canvas id="chartDesempeno"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Distribución de Calificaciones</div>
+      <div class="chart-box-sm"><canvas id="chartDesempenoDist"></canvas></div>
+    </div>
   </div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle Evaluaciones — Marzo 2026 <small>11 evaluados</small></div><div class="tbl-wrap" id="tblDesempeno"></div></div>
 </div>
 
-<!-- TAB: ROTACION -->
+<!-- ======== TAB: ROTACION ======== -->
 <div class="tab-content" id="tab-rotacion">
   <div class="cards-grid cards-4" id="rotacionKPIs"></div>
   <div class="row row-2">
     <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent)"></span>Índice de Rotación Mensual (%)</div><div class="chart-box"><canvas id="chartRotacion"></canvas></div></div>
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Total Salidas por Mes</div><div class="chart-box"><canvas id="chartRotacionBar"></canvas></div></div>
+    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Movimientos por Mes (Salidas)</div><div class="chart-box"><canvas id="chartRotacionBar"></canvas></div></div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle Mensual de Rotación</div><div class="tbl-wrap" id="tblRotacion"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle Mensual de Rotación</div><div class="tbl-wrap" id="tblRotacion"></div></div>
 </div>
 
-<!-- TAB: CAPACITACIONES -->
+<!-- ======== TAB: CAPACITACIONES ======== -->
 <div class="tab-content" id="tab-capacitaciones">
   <div class="cards-grid cards-3" id="capKPIs"></div>
   <div class="row row-2">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>% Cumplimiento de Capacitaciones por Mes</div><div class="chart-box"><canvas id="chartCap"></canvas></div></div>
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Personal Capacitado por Área</div><div class="chart-box"><canvas id="chartCapArea"></canvas></div></div>
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Indicador de Capacitación — Marzo 2026</div>
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:72px;font-weight:800;color:var(--accent3);line-height:1">100%</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-top:8px">Meta alcanzada — 11/11 personas capacitadas</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;font-style:italic">Tema: Política de Gestión del Tiempo Laboral y Cumplimiento de Jornada</div>
+        <div style="margin-top:16px;font-size:11px;color:var(--text-secondary)">Fecha: 25/03/2026 · Tipo: Presencial · Sede: Nazca</div>
+      </div>
+    </div>
+    <div class="panel auto">
+      <div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Capacitados por Área</div>
+      <div class="chart-box-sm"><canvas id="chartCapArea"></canvas></div>
+    </div>
   </div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Detalle de Capacitaciones</div><div class="tbl-wrap" id="tblCap"></div></div>
 </div>
 
-<!-- TAB: CONTRATOS -->
+<!-- ======== TAB: CONTRATOS ======== -->
 <div class="tab-content" id="tab-contratos">
   <div class="cards-grid cards-4" id="contratosKPIs"></div>
-  <div class="row row-2">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>% Renovaciones a Tiempo por Mes</div><div class="chart-box"><canvas id="chartContratos"></canvas></div></div>
+  <div class="row row-6-4">
+    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Vencimiento de Contratos (próximos 90 días)</div><div class="chart-box"><canvas id="chartContratos"></canvas></div></div>
     <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Tipo de Contrato</div><div class="chart-box-sm"><canvas id="chartContratosPie"></canvas></div></div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Vencimiento de Contratos</div><div class="tbl-wrap" id="tblContratos"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent3)"></span>Control de Contratos <small>por vencimiento</small></div><div class="tbl-wrap" id="tblContratos"></div></div>
 </div>
 
-<!-- TAB: ASISTENCIA -->
+<!-- ======== TAB: ASISTENCIA ======== -->
 <div class="tab-content" id="tab-asistencia">
   <div class="cards-grid cards-3" id="asisKPIs"></div>
+  <div class="semaforo-grid" id="semaforoCards"></div>
   <div class="row row-2">
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Asistencia por Semana (Marzo 2026)</div><div class="chart-box"><canvas id="chartAsis"></canvas></div></div>
-    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent)"></span>Distribución General de Puntualidad</div><div class="chart-box-sm"><canvas id="chartAsisPie"></canvas></div></div>
+    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--primary)"></span>Asistencia por Semana — Marzo 2026</div><div class="chart-box"><canvas id="chartAsis"></canvas></div></div>
+    <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent2)"></span>Distribución General</div><div class="chart-box-sm"><canvas id="chartAsisPie"></canvas></div></div>
   </div>
-  <div class="panel"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>% por Semana</div><div class="tbl-wrap" id="tblAsistencia"></div></div>
+  <div class="panel auto"><div class="panel-title"><span class="dot" style="background:var(--accent4)"></span>Puntualidad Individual — Marzo 2026 <small>250 registros</small></div><div class="tbl-wrap" id="tblAsistencia"></div></div>
 </div>
 
 </main>
 </div>
 
 <script>
-// ============ DATA ============
+// ============================================================
+// DATOS REALES — BASE-RRHH.xlsx
+// ============================================================
 const DATA = {
-trabajadores: [
+trabajadores:[
 {NroDoc:42631013,APENON:"ALARCON DIAZ ELIO JOEL",PLANILLA:"ERG",CARGO:"JEFE DE OPERACIONES",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:5000},
-{NroDoc:41279478,APENON:"TAPIA QUISPE ELIAS ALBERTO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
-{NroDoc:44444522,APENON:"MENDOZA CORTEZ MIGUEL ANGEL",PLANILLA:"ERG",CARGO:"COORDINADOR DE OPERACIONES",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-15",TERMINO:"2026-09-14",REMUNERACION:2000},
-{NroDoc:42119644,APENON:"VASQUEZ GABRIEL DENNIS ALEJANDRO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
-{NroDoc:47612675,APENON:"PEREZ BAUTISTA JAVIER",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-11",TERMINO:"2026-06-10",REMUNERACION:3800},
-{NroDoc:71374505,APENON:"LARA BERNALES ERICK YONATHAN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
-{NroDoc:46320840,APENON:"LOPEZ GUTIERREZ DANNY YOEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PROFUTURO",INGRESO:"2025-12-01",TERMINO:"2026-03-31",REMUNERACION:3800},
-{NroDoc:70475213,APENON:"TIPIAN HUARCA MARCO ANTONIO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
-{NroDoc:40630164,APENON:"URIBE CASMA HEINER ELVIS",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-01",TERMINO:"2026-03-31",REMUNERACION:3800},
-{NroDoc:21874816,APENON:"MONSERRATE CARTAGENA PABLO CESAR",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2026-01-02",TERMINO:"2026-04-01",REMUNERACION:3800},
-{NroDoc:41005612,APENON:"HUACHIN CASTRO FERNANDO DAVID",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-02",TERMINO:"2026-04-01",REMUNERACION:3800},
-{NroDoc:41994550,APENON:"CHIPANA VASQUEZ WILLY JOEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-03",TERMINO:"2026-04-02",REMUNERACION:3800},
-{NroDoc:48177015,APENON:"HUAMAN HUALPA FREDY ROGER",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-03",TERMINO:"2026-04-02",REMUNERACION:3800},
-{NroDoc:41792887,APENON:"ROJAS QUISPE ABRAHAM",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-11",TERMINO:"2026-04-10",REMUNERACION:3800},
-{NroDoc:41968885,APENON:"ESPINO TOLEDO LUIS ALBERTO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-01",TERMINO:"2026-03-31",REMUNERACION:3800},
-{NroDoc:70271828,APENON:"CRIADO CORTEZ MIRIAN MARGARITA",PLANILLA:"ERG",CARGO:"JEFE RECURSOS HUMANOS",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PRIMA",INGRESO:"2025-10-01",TERMINO:"2026-06-30",REMUNERACION:2500},
-{NroDoc:46091380,APENON:"BAUTISTA QUISPE DIANA SALOME",PLANILLA:"ERG",CARGO:"ASISTENTE CONTABLE",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PRIMA",INGRESO:"2025-10-03",TERMINO:"2026-07-02",REMUNERACION:2000},
-{NroDoc:80014811,APENON:"TORRICO ARIAS JHONNY ANDRES",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-PRIMA",INGRESO:"2019-01-02",TERMINO:"INDETERMINADO",REMUNERACION:4730},
-{NroDoc:73868556,APENON:"TENORIO GALLEGOS AMBAR YERALDINN",PLANILLA:"ERG",CARGO:"ADMINISTRADORA",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"ONP",INGRESO:"2019-09-02",TERMINO:"INDETERMINADO",REMUNERACION:4000},
-{NroDoc:21570990,APENON:"VIVANCO BERROCAL PABLO MAURICIO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2022-10-09",TERMINO:"INDETERMINADO",REMUNERACION:3800},
-{NroDoc:40511284,APENON:"VELARDE CARDENAS JOSE ANGEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2025-04-01",TERMINO:"2026-03-31",REMUNERACION:3900},
-{NroDoc:76905280,APENON:"TENORIO GALLEGOS NINO ANTHONY",PLANILLA:"ERG",CARGO:"ASISTENTE ADMINISTRATIVO",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-05-02",TERMINO:"2026-05-01",REMUNERACION:2200},
+{NroDoc:47326293,APENON:"BARBOZA LEON LEODAN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2026-03-22",TERMINO:"2026-06-21",REMUNERACION:2800},
+{NroDoc:46091380,APENON:"BAUTISTA QUISPE DIANA SALOME",PLANILLA:"ERG",CARGO:"ASISTENTE CONTABLE",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PRIMA",INGRESO:"2025-10-03",TERMINO:"INDETERMINADO",REMUNERACION:2000},
 {NroDoc:70208755,APENON:"CACERES SULLA KATHERINE MAYTE",PLANILLA:"ERG",CARGO:"ASISTENTE DE FACTURACION",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"ONP",INGRESO:"2026-02-02",TERMINO:"2026-05-02",REMUNERACION:2200},
-{NroDoc:44567305,APENON:"ROJAS INCA LJUBICA LOURDES",PLANILLA:"ERG",CARGO:"ASISTENTE DE ADMINISTRACION",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PROFUTURO",INGRESO:"2026-02-06",TERMINO:"2026-05-05",REMUNERACION:1800},
-{NroDoc:71751941,APENON:"JURADO GUILLEN YERSON DENNYS",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2026-02-02",TERMINO:"2026-06-01",REMUNERACION:3800},
-{NroDoc:42206109,APENON:"RIPAS GUILLEN CESAR AUGUSTO KEVIN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2026-02-01",TERMINO:"2026-04-30",REMUNERACION:3800},
-{NroDoc:70130789,APENON:"LOPEZ BENDEZU ANGEL ALBERTO",PLANILLA:"RH",CARGO:"MANTENIMIENTO",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"N/A",INGRESO:"2026-02-02",TERMINO:"N/A",REMUNERACION:3800},
-{NroDoc:46514146,APENON:"IÑIPE MOZOMBITE ELMA",PLANILLA:"RH",CARGO:"LIMPIEZA",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"N/A",INGRESO:"2026-02-02",TERMINO:"N/A",REMUNERACION:1500},
-{NroDoc:45750466,APENON:"ZAPATA CARRERA MARTIN LEONARDO",PLANILLA:"ERG",CARGO:"ASISTENTE DE RRHH",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP",INGRESO:"2026-03-02",TERMINO:"2026-09-01",REMUNERACION:2200},
+{NroDoc:41994550,APENON:"CHIPANA VASQUEZ WILLY JOEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-03",TERMINO:"2026-04-02",REMUNERACION:3800},
+{NroDoc:70271828,APENON:"CRIADO CORTEZ MIRIAN MARGARITA",PLANILLA:"ERG",CARGO:"JEFE RECURSOS HUMANOS",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PRIMA",INGRESO:"2025-10-01",TERMINO:"2026-06-30",REMUNERACION:2500},
+{NroDoc:41968885,APENON:"ESPINO TOLEDO LUIS ALBERTO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-01",TERMINO:"2026-03-31",REMUNERACION:3800},
+{NroDoc:70560736,APENON:"GALLEGOS ROJAS DANNY MARIALINA",PLANILLA:"ERG",CARGO:"ASISTENTE CONTABLE",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP",INGRESO:"2026-03-16",TERMINO:"2026-06-15",REMUNERACION:2200},
+{NroDoc:41005612,APENON:"HUACHIN CASTRO FERNANDO DAVID",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-02",TERMINO:"2026-04-01",REMUNERACION:3800},
+{NroDoc:48177015,APENON:"HUAMAN HUALPA FREDY ROGER",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-03",TERMINO:"2026-04-02",REMUNERACION:3800},
 {NroDoc:71504030,APENON:"HUAMANI VICENTE NOE FRANCISCO",PLANILLA:"ERG",CARGO:"ANALISTA CONTABLE",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP",INGRESO:"2026-03-02",TERMINO:"2026-06-01",REMUNERACION:2500},
 {NroDoc:46262099,APENON:"HUAYTA QUISPE GINO ALEXIS",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2026-03-05",TERMINO:"2026-06-04",REMUNERACION:3800},
-{NroDoc:70560736,APENON:"GALLEGOS ROJAS DANNY MARIALINA",PLANILLA:"ERG",CARGO:"ASISTENTE CONTABLE",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP",INGRESO:"2026-03-16",TERMINO:"2026-06-15",REMUNERACION:2200},
-{NroDoc:47326293,APENON:"BARBOZA LEON LEODAN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2026-03-22",TERMINO:"2026-06-21",REMUNERACION:2800}
+{NroDoc:46514146,APENON:"IÑIPE MOZOMBITE ELMA",PLANILLA:"RH",CARGO:"LIMPIEZA",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"N/A",INGRESO:"2026-02-02",TERMINO:"N/A",REMUNERACION:1500},
+{NroDoc:71751941,APENON:"JURADO GUILLEN YERSON DENNYS",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2026-02-02",TERMINO:"2026-06-01",REMUNERACION:3800},
+{NroDoc:71374505,APENON:"LARA BERNALES ERICK YONATHAN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
+{NroDoc:70130789,APENON:"LOPEZ BENDEZU ANGEL ALBERTO",PLANILLA:"RH",CARGO:"MANTENIMIENTO",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"N/A",INGRESO:"2026-02-02",TERMINO:"N/A",REMUNERACION:3800},
+{NroDoc:46320840,APENON:"LOPEZ GUTIERREZ DANNY YOEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-PROFUTURO",INGRESO:"2025-12-01",TERMINO:"2026-03-31",REMUNERACION:3800},
+{NroDoc:44444522,APENON:"MENDOZA CORTEZ MIGUEL ANGEL",PLANILLA:"ERG",CARGO:"COORDINADOR DE OPERACIONES",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-15",TERMINO:"2026-09-14",REMUNERACION:2000},
+{NroDoc:21874816,APENON:"MONSERRATE CARTAGENA PABLO CESAR",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2026-01-02",TERMINO:"2026-04-01",REMUNERACION:3800},
+{NroDoc:47612675,APENON:"PEREZ BAUTISTA JAVIER",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-11",TERMINO:"2026-06-10",REMUNERACION:3800},
+{NroDoc:42206109,APENON:"RIPAS GUILLEN CESAR AUGUSTO KEVIN",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2026-02-01",TERMINO:"2026-04-30",REMUNERACION:3800},
+{NroDoc:44567305,APENON:"ROJAS INCA LJUBICA LOURDES",PLANILLA:"ERG",CARGO:"ASISTENTE DE ADMINISTRACION",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"AFP-PROFUTURO",INGRESO:"2026-02-06",TERMINO:"2026-05-05",REMUNERACION:1800},
+{NroDoc:41792887,APENON:"ROJAS QUISPE ABRAHAM",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2026-01-11",TERMINO:"2026-04-10",REMUNERACION:3800},
+{NroDoc:41279478,APENON:"TAPIA QUISPE ELIAS ALBERTO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
+{NroDoc:73868556,APENON:"TENORIO GALLEGOS AMBAR YERALDINN",PLANILLA:"ERG",CARGO:"ADMINISTRADORA",Sexo:"F",EstadoCivil:"SOLTERA","AFP/ONP":"ONP",INGRESO:"2019-09-02",TERMINO:"INDETERMINADO",REMUNERACION:4000},
+{NroDoc:76905280,APENON:"TENORIO GALLEGOS NINO ANTHONY",PLANILLA:"ERG",CARGO:"ASISTENTE ADMINISTRATIVO",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-05-02",TERMINO:"2026-05-01",REMUNERACION:2200},
+{NroDoc:70475213,APENON:"TIPIAN HUARCA MARCO ANTONIO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-INTEGRA",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
+{NroDoc:80014811,APENON:"TORRICO ARIAS JHONNY ANDRES",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-PRIMA",INGRESO:"2019-01-02",TERMINO:"INDETERMINADO",REMUNERACION:4730},
+{NroDoc:40630164,APENON:"URIBE CASMA HEINER ELVIS",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"AFP-PRIMA",INGRESO:"2026-01-01",TERMINO:"2026-03-31",REMUNERACION:3800},
+{NroDoc:42119644,APENON:"VASQUEZ GABRIEL DENNIS ALEJANDRO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP-HABITAT",INGRESO:"2025-12-01",TERMINO:"2026-05-30",REMUNERACION:3800},
+{NroDoc:40511284,APENON:"VELARDE CARDENAS JOSE ANGEL",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"CASADO","AFP/ONP":"ONP",INGRESO:"2025-04-01",TERMINO:"2026-03-31",REMUNERACION:3900},
+{NroDoc:21570990,APENON:"VIVANCO BERROCAL PABLO MAURICIO",PLANILLA:"ERG",CARGO:"CHOFER",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"ONP",INGRESO:"2022-10-09",TERMINO:"INDETERMINADO",REMUNERACION:3800},
+{NroDoc:45750466,APENON:"ZAPATA CARRERA MARTIN LEONARDO",PLANILLA:"ERG",CARGO:"ASISTENTE DE RRHH",Sexo:"M",EstadoCivil:"SOLTERO","AFP/ONP":"AFP",INGRESO:"2026-03-02",TERMINO:"2026-09-01",REMUNERACION:2200}
 ],
 planilla:[
-{num:1,nombre:"ALARCON DIAZ ELIO JOEL",cargo:"JEFE DE OPERACIONES",sistema:"INTEGRA FLUJO",sueldo:5000,ingreso:5196.33,descuentos:862.24,essalud:467.67,vida:28.87,neto:4334.09},
-{num:2,nombre:"BAUTISTA QUISPE DIANA SALOME",cargo:"ASISTENTE CONTABLE",sistema:"PRIMA MIXTO",sueldo:2000,ingreso:2133.33,descuentos:242.56,essalud:192,vida:11.31,neto:1890.77},
-{num:3,nombre:"CACERES SULLA KATHERINE MAYTE",cargo:"ASIST. FACTURACION",sistema:"ONP",sueldo:2200,ingreso:2346.67,descuentos:305.07,essalud:211.2,vida:12.44,neto:2041.60},
+{num:1,nombre:"ALARCON DIAZ ELIO JOEL",cargo:"JEFE OPERACIONES",sistema:"INTEGRA FLUJO",sueldo:5000,ingreso:5196.33,descuentos:862.24,essalud:467.67,vida:28.87,neto:4334.09},
+{num:2,nombre:"BAUTISTA QUISPE DIANA SALOME",cargo:"ASIST. CONTABLE",sistema:"PRIMA MIXTO",sueldo:2000,ingreso:2133.33,descuentos:242.56,essalud:192.00,vida:11.31,neto:1890.77},
+{num:3,nombre:"CACERES SULLA KATHERINE MAYTE",cargo:"ASIST. FACTURACION",sistema:"ONP",sueldo:2200,ingreso:2346.67,descuentos:305.07,essalud:211.20,vida:12.44,neto:2041.60},
 {num:4,nombre:"CHIPANA VASQUEZ WILLY JOEL",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:5,nombre:"CRIADO CORTEZ MIRIAN M.",cargo:"JEFE RRHH",sistema:"PRIMA MIXTO",sueldo:2500,ingreso:2666.67,descuentos:303.20,essalud:240,vida:14.13,neto:2363.47},
-{num:6,nombre:"ESPINO TOLEDO LUIS A.",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:7,nombre:"GALLEGOS ROJAS DANNY M.",cargo:"ASIST. CONTABLE",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:1246.67,descuentos:141.75,essalud:112.20,vida:12.44,neto:1104.92},
-{num:8,nombre:"HUACHIN CASTRO FERNANDO D.",cargo:"CONDUCTOR",sistema:"PRIMA MIXTO",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:9,nombre:"HUAMAN HUALPA FREDY R.",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:10,nombre:"HUAMANI VICENTE NOE F.",cargo:"ANALISTA CONTABLE",sistema:"INTEGRA MIXTA",sueldo:2500,ingreso:2666.67,descuentos:303.20,essalud:240,vida:14.13,neto:2363.47},
-{num:11,nombre:"HUAYTA QUISPE GINO A.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3680.08,descuentos:565.22,essalud:331.21,vida:20.14,neto:3114.86},
-{num:12,nombre:"IÑIPE MOZOMBITE ELMA",cargo:"SERV. GENERALES",sistema:"RH",sueldo:1500,ingreso:1500,descuentos:0,essalud:0,vida:0,neto:1500},
-{num:13,nombre:"JURADO GUILLEN YERSON D.",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3800,descuentos:530.06,essalud:342,vida:20.14,neto:3269.94},
-{num:14,nombre:"LARA BERNALES ERICK Y.",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:15,nombre:"LOPEZ BENDEZU ANGEL A.",cargo:"MANTENIMIENTO",sistema:"RH",sueldo:3800,ingreso:3800,descuentos:0,essalud:0,vida:0,neto:3800},
-{num:16,nombre:"LOPEZ GUTIERREZ DANNY Y.",cargo:"CONDUCTOR",sistema:"PROFUTURO MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:17,nombre:"MENDOZA CORTEZ MIGUEL A.",cargo:"COORD. OPERACIONES",sistema:"INTEGRA MIXTA",sueldo:2000,ingreso:2153.08,descuentos:244.81,essalud:193.78,vida:11.91,neto:1908.28},
-{num:18,nombre:"MONSERRATE CARTAGENA P.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3413,descuentos:505.57,essalud:307.17,vida:20.74,neto:2907.43},
+{num:5,nombre:"CRIADO CORTEZ MIRIAN MARGARITA",cargo:"JEFE RRHH",sistema:"PRIMA MIXTO",sueldo:2500,ingreso:2666.67,descuentos:303.20,essalud:240.00,vida:14.13,neto:2363.47},
+{num:6,nombre:"ESPINO TOLEDO LUIS ALBERTO",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:7,nombre:"GALLEGOS ROJAS DANNY MARIALINA",cargo:"ASIST. CONTABLE",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:1246.67,descuentos:141.75,essalud:112.20,vida:12.44,neto:1104.92},
+{num:8,nombre:"HUACHIN CASTRO FERNANDO DAVID",cargo:"CONDUCTOR",sistema:"PRIMA MIXTO",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:9,nombre:"HUAMAN HUALPA FREDY ROGER",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:10,nombre:"HUAMANI VICENTE NOE FRANCISCO",cargo:"ANALISTA CONTABLE",sistema:"INTEGRA MIXTA",sueldo:2500,ingreso:2666.67,descuentos:303.20,essalud:240.00,vida:14.13,neto:2363.47},
+{num:11,nombre:"HUAYTA QUISPE GINO ALEXIS",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3680.08,descuentos:565.22,essalud:331.21,vida:20.14,neto:3114.86},
+{num:12,nombre:"IÑIPE MOZOMBITE ELMA",cargo:"SERV. GENERALES",sistema:"RH",sueldo:1500,ingreso:1500.00,descuentos:0,essalud:0,vida:0,neto:1500.00},
+{num:13,nombre:"JURADO GUILLEN YERSON DENNYS",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3800.00,descuentos:530.06,essalud:342.00,vida:20.14,neto:3269.94},
+{num:14,nombre:"LARA BERNALES ERICK YONATHAN",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:15,nombre:"LOPEZ BENDEZU ANGEL ALBERTO",cargo:"MANTENIMIENTO",sistema:"RH",sueldo:3800,ingreso:3800.00,descuentos:0,essalud:0,vida:0,neto:3800.00},
+{num:16,nombre:"LOPEZ GUTIERREZ DANNY YOEL",cargo:"CONDUCTOR",sistema:"PROFUTURO MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:17,nombre:"MENDOZA CORTEZ MIGUEL ANGEL",cargo:"COORD. OPERACIONES",sistema:"INTEGRA MIXTA",sueldo:2000,ingreso:2153.08,descuentos:244.81,essalud:193.78,vida:11.91,neto:1908.28},
+{num:18,nombre:"MONSERRATE CARTAGENA PABLO CESAR",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3413.00,descuentos:505.57,essalud:307.17,vida:20.74,neto:2907.43},
 {num:19,nombre:"PEREZ BAUTISTA JAVIER",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3680.08,descuentos:505.23,essalud:331.21,vida:20.14,neto:3174.85},
-{num:20,nombre:"RIPAS GUILLEN CESAR A.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3913,descuentos:617.24,essalud:352.17,vida:20.74,neto:3295.76},
-{num:21,nombre:"ROJAS INCA LJUBICA L.",cargo:"ASIST. ADMINISTRATIVO",sistema:"PROFUTURO MIXTA",sueldo:1800,ingreso:1920,descuentos:218.30,essalud:172.80,vida:10.18,neto:1701.70},
+{num:20,nombre:"RIPAS GUILLEN CESAR AUGUSTO KEVIN",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3913.00,descuentos:617.24,essalud:352.17,vida:20.74,neto:3295.76},
+{num:21,nombre:"ROJAS INCA LJUBICA LOURDES",cargo:"ASIST. ADMINISTRATIVO",sistema:"PROFUTURO MIXTA",sueldo:1800,ingreso:1920.00,descuentos:218.30,essalud:172.80,vida:10.18,neto:1701.70},
 {num:22,nombre:"ROJAS QUISPE ABRAHAM",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:23,nombre:"TAPIA QUISPE ELIAS A.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3793.08,descuentos:590.45,essalud:341.38,vida:20.74,neto:3202.63},
-{num:24,nombre:"TENORIO GALLEGOS AMBAR Y.",cargo:"ADMINISTRADORA",sistema:"ONP",sueldo:4000,ingreso:4266.67,descuentos:696.22,essalud:384,vida:22.61,neto:3570.44},
-{num:25,nombre:"TENORIO GALLEGOS NINO A.",cargo:"ASIST. ADMINISTRATIVO",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:2346.67,descuentos:266.82,essalud:211.20,vida:12.44,neto:2079.85},
-{num:26,nombre:"TIPIAN HUARCA MARCO A.",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3643.08,descuentos:497.57,essalud:327.88,vida:20.74,neto:3145.51},
-{num:27,nombre:"TORRICO ARIAS JHONNY A.",cargo:"CONDUCTOR",sistema:"PRIMA FLUJO",sueldo:4730,ingreso:4843,descuentos:766.14,essalud:435.87,vida:25.67,neto:4076.86},
-{num:28,nombre:"URIBE CASMA HEINER E.",cargo:"CONDUCTOR",sistema:"PRIMA MIXTO",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:29,nombre:"VASQUEZ GABRIEL DENNIS A.",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
-{num:30,nombre:"VELARDE CARDENAS JOSE A.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3900,ingreso:3700,descuentos:569.67,essalud:333,vida:20.67,neto:3130.33},
-{num:31,nombre:"VIVANCO BERROCAL PABLO M.",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3793.08,descuentos:590.45,essalud:341.38,vida:20.74,neto:3202.63},
-{num:32,nombre:"ZAPATA CARRERA MARTIN L.",cargo:"ASIST. RRHH",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:2386.33,descuentos:271.33,essalud:214.77,vida:13.04,neto:2115.01},
-{num:33,nombre:"BARBOZA LEON LEODAN",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:1253,descuentos:162.89,essalud:112.77,vida:20.74,neto:1090.11}
+{num:23,nombre:"TAPIA QUISPE ELIAS ALBERTO",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3793.08,descuentos:590.45,essalud:341.38,vida:20.74,neto:3202.63},
+{num:24,nombre:"TENORIO GALLEGOS AMBAR YERALDINN",cargo:"ADMINISTRADORA",sistema:"ONP",sueldo:4000,ingreso:4266.67,descuentos:696.22,essalud:384.00,vida:22.61,neto:3570.44},
+{num:25,nombre:"TENORIO GALLEGOS NINO ANTHONY",cargo:"ASIST. ADMINISTRATIVO",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:2346.67,descuentos:266.82,essalud:211.20,vida:12.44,neto:2079.85},
+{num:26,nombre:"TIPIAN HUARCA MARCO ANTONIO",cargo:"CONDUCTOR",sistema:"INTEGRA MIXTA",sueldo:3800,ingreso:3643.08,descuentos:497.57,essalud:327.88,vida:20.74,neto:3145.51},
+{num:27,nombre:"TORRICO ARIAS JHONNY ANDRES",cargo:"CONDUCTOR",sistema:"PRIMA FLUJO",sueldo:4730,ingreso:4843.00,descuentos:766.14,essalud:435.87,vida:25.67,neto:4076.86},
+{num:28,nombre:"URIBE CASMA HEINER ELVIS",cargo:"CONDUCTOR",sistema:"PRIMA MIXTO",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:29,nombre:"VASQUEZ GABRIEL DENNIS ALEJANDRO",cargo:"CONDUCTOR",sistema:"HABITAT MIXTA",sueldo:3800,ingreso:3793.08,descuentos:528.63,essalud:341.38,vida:20.74,neto:3264.45},
+{num:30,nombre:"VELARDE CARDENAS JOSE ANGEL",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3900,ingreso:3700.00,descuentos:569.67,essalud:333.00,vida:20.67,neto:3130.33},
+{num:31,nombre:"VIVANCO BERROCAL PABLO MAURICIO",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:3793.08,descuentos:590.45,essalud:341.38,vida:20.74,neto:3202.63},
+{num:32,nombre:"ZAPATA CARRERA MARTIN LEONARDO",cargo:"ASIST. RRHH",sistema:"INTEGRA MIXTA",sueldo:2200,ingreso:2386.33,descuentos:271.33,essalud:214.77,vida:13.04,neto:2115.01},
+{num:33,nombre:"BARBOZA LEON LEODAN",cargo:"CONDUCTOR",sistema:"ONP",sueldo:3800,ingreso:1253.00,descuentos:162.89,essalud:112.77,vida:20.74,neto:1090.11}
 ],
 clima:[
-{Mes:"Ene",p1:5,p2:3,p3:5,p4:5,p5:3,prom:4.2,area:"ADMINISTRACION"},
-{Mes:"Feb",p1:4,p2:3,p3:3,p4:3,p5:3,prom:3.2,area:"RRHH"},
-{Mes:"Mar",p1:3,p2:5,p3:5,p4:5,p5:2,prom:4.0,area:"CONTABILIDAD"},
-{Mes:"Abr",p1:5,p2:3,p3:5,p4:5,p5:3,prom:4.2,area:"ADMINISTRACION"},
-{Mes:"May",p1:4,p2:2,p3:3,p4:5,p5:5,prom:3.8,area:"OPERACIONES"},
-{Mes:"Jun",p1:4,p2:2,p3:4,p4:5,p5:5,prom:4.0,area:"RRHH"},
-{Mes:"Jul",p1:2,p2:5,p3:4,p4:3,p5:2,prom:3.2,area:"OPERACIONES"},
-{Mes:"Ago",p1:5,p2:3,p3:5,p4:5,p5:3,prom:4.2,area:"CONDUCTORES"},
-{Mes:"Set",p1:5,p2:4,p3:2,p4:3,p5:5,prom:3.8,area:"RRHH"},
-{Mes:"Oct",p1:4,p2:2,p3:4,p4:5,p5:5,prom:4.0,area:"ADMINISTRACION"},
-{Mes:"Nov",p1:4,p2:2,p3:4,p4:5,p5:5,prom:4.0,area:"CONTABILIDAD"},
-{Mes:"Dic",p1:3,p2:5,p3:5,p4:5,p5:2,prom:4.0,area:"RRHH"}
+  {trabajador:"ANONIMO",area:"Recursos Humanos",p1:4,p2:5,p3:4,p4:5,p5:5,total:23,prom:4.6,pct:92,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Operaciones",p1:5,p2:5,p3:5,p4:5,p5:5,total:25,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Operaciones",p1:5,p2:5,p3:5,p4:5,p5:5,total:25,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Administracion",p1:5,p2:4,p3:3,p4:4,p5:5,total:21,prom:4.2,pct:84,nivel:"Bueno"},
+  {trabajador:"ANONIMO",area:"Operaciones",p1:5,p2:5,p3:5,p4:5,p5:5,total:25,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Contabilidad",p1:4,p2:4,p3:3,p4:4,p5:4,total:19,prom:3.8,pct:76,nivel:"Bueno"},
+  {trabajador:"ANONIMO",area:"Recursos Humanos",p1:5,p2:5,p3:4,p4:5,p5:5,total:24,prom:4.8,pct:96,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Contabilidad",p1:5,p2:4,p3:3,p4:4,p5:5,total:21,prom:4.2,pct:84,nivel:"Bueno"},
+  {trabajador:"ANONIMO",area:"Administracion",p1:5,p2:5,p3:4,p4:5,p5:5,total:24,prom:4.8,pct:96,nivel:"Excelente"},
+  {trabajador:"ANONIMO",area:"Administracion",p1:1,p2:1,p3:2,p4:1,p5:1,total:6,prom:1.2,pct:24,nivel:"Deficiente"},
+  {trabajador:"ANONIMO",area:"Administracion",p1:5,p2:5,p3:3,p4:5,p5:5,total:23,prom:4.6,pct:92,nivel:"Excelente"}
+],
+desempeno:[
+  {trabajador:"LEONARDO ZAPATA CARRERA",area:"RECURSOS HUMANOS",r:5,te:5,c:5,co:5,ct:5,p:5,total:30,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"ALARCON DIAZ ELIO JOEL",area:"OPERACIONES",r:5,te:5,c:5,co:5,ct:5,p:5,total:30,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"TENORIO GALLEGOS AMBAR Y.",area:"ADMINISTRACION",r:5,te:5,c:5,co:5,ct:5,p:5,total:30,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"CRIADO CORTEZ MIRIAN M.",area:"RECURSOS HUMANOS",r:4,te:5,c:5,co:4,ct:4,p:3,total:25,prom:4.17,pct:83.3,nivel:"Bueno"},
+  {trabajador:"ROJAS INCA LJUBICA LOURDES",area:"ADMINISTRACION",r:5,te:5,c:5,co:5,ct:5,p:5,total:30,prom:5.0,pct:100,nivel:"Excelente"},
+  {trabajador:"BAUTISTA QUISPE DIANA SALOME",area:"CONTABILIDAD",r:5,te:5,c:5,co:5,ct:5,p:3,total:28,prom:4.67,pct:93.3,nivel:"Excelente"},
+  {trabajador:"HUAMANI VICENTE NOE F.",area:"CONTABILIDAD",r:4,te:4,c:4,co:4,ct:4,p:4,total:24,prom:4.0,pct:80.0,nivel:"Bueno"},
+  {trabajador:"GALLEGOS ROJAS DANNY M.",area:"CONTABILIDAD",r:5,te:5,c:4,co:5,ct:4,p:5,total:28,prom:4.67,pct:93.3,nivel:"Excelente"},
+  {trabajador:"CACERES SULLA KATHERINE M.",area:"ADMINISTRACION",r:4,te:5,c:5,co:4,ct:4,p:4,total:26,prom:4.33,pct:86.7,nivel:"Bueno"},
+  {trabajador:"LOPEZ BENDEZU ANGEL A.",area:"OPERACIONES",r:5,te:5,c:5,co:5,ct:5,p:4,total:29,prom:4.83,pct:96.7,nivel:"Excelente"},
+  {trabajador:"TENORIO GALLEGOS NINO A.",area:"ADMINISTRACION",r:5,te:5,c:5,co:5,ct:5,p:4,total:29,prom:4.83,pct:96.7,nivel:"Excelente"}
 ],
 rotacion:[
-{mes:"ENE",ini:30,fin:29,sal:1,ren:1,desp:0},
-{mes:"FEB",ini:30,fin:25,sal:5,ren:5,desp:0},
-{mes:"MAR",ini:30,fin:29,sal:1,ren:1,desp:0},
-{mes:"ABR",ini:30,fin:24,sal:6,ren:6,desp:0},
-{mes:"MAY",ini:30,fin:29,sal:1,ren:1,desp:0},
-{mes:"JUN",ini:30,fin:25,sal:5,ren:5,desp:0},
-{mes:"JUL",ini:30,fin:25,sal:5,ren:5,desp:0},
-{mes:"AGO",ini:30,fin:27,sal:3,ren:3,desp:0},
-{mes:"SET",ini:30,fin:26,sal:4,ren:4,desp:0},
-{mes:"OCT",ini:30,fin:28,sal:2,ren:2,desp:0},
-{mes:"NOV",ini:30,fin:29,sal:1,ren:1,desp:0},
-{mes:"DIC",ini:30,fin:30,sal:0,ren:0,desp:0}
+  {mes:"ENERO",ini:25,fin:25,sal:0,ren:0,desp:0,prom:25,pct:0},
+  {mes:"FEBRERO",ini:25,fin:24,sal:1,ren:1,desp:0,prom:24.5,pct:4.08},
+  {mes:"MARZO",ini:24,fin:24,sal:0,ren:0,desp:0,prom:24,pct:0}
 ],
 capacitaciones:[
-{month:"Ene",total:203,cap:185,count:35},{month:"Feb",total:203,cap:194,count:35},
-{month:"Mar",total:203,cap:194,count:35},{month:"Abr",total:203,cap:194,count:35},
-{month:"May",total:203,cap:194,count:35},{month:"Jun",total:203,cap:194,count:35},
-{month:"Jul",total:203,cap:194,count:35},{month:"Ago",total:203,cap:194,count:35},
-{month:"Set",total:203,cap:194,count:35},{month:"Oct",total:203,cap:194,count:35},
-{month:"Nov",total:203,cap:194,count:35},{month:"Dic",total:203,cap:194,count:35}
+  {area:"ADMINISTRACION",tema:"Política de Gestión del Tiempo Laboral y Cumplimiento de Jornada",total:4,cap:4,fecha:"25/03/2026",tipo:"Presencial",pct:100},
+  {area:"CONTABILIDAD",tema:"Política de Gestión del Tiempo Laboral y Cumplimiento de Jornada",total:3,cap:3,fecha:"25/03/2026",tipo:"Presencial",pct:100},
+  {area:"OPERACIONES",tema:"Política de Gestión del Tiempo Laboral y Cumplimiento de Jornada",total:2,cap:2,fecha:"25/03/2026",tipo:"Presencial",pct:100},
+  {area:"RRHH",tema:"Política de Gestión del Tiempo Laboral y Cumplimiento de Jornada",total:2,cap:2,fecha:"25/03/2026",tipo:"Presencial",pct:100}
 ],
-capArea:[
-{area:"ADMINISTRACIÓN",total:336,cap:336},{area:"CONDUCTORES",total:1428,cap:1311},
-{area:"CONTABILIDAD",total:168,cap:168},{area:"OPERACIONES",total:252,cap:252},{area:"RRHH",total:252,cap:252}
-],
-asistencia:[
-{week:"Sem 10",puntual:27,tardanza:27,tolerancia:6},
-{week:"Sem 11",puntual:24,tardanza:30,tolerancia:6},
-{week:"Sem 12",puntual:24,tardanza:26,tolerancia:14},
-{week:"Sem 13",puntual:15,tardanza:17,tolerancia:1}
-]
+asistencia:{
+  semanas:[
+    {week:"Sem 1 (02-07 Mar)",puntual:27,tardanza:20,tolerancia:13},
+    {week:"Sem 2 (09-14 Mar)",puntual:26,tardanza:28,tolerancia:6},
+    {week:"Sem 3 (16-21 Mar)",puntual:32,tardanza:29,tolerancia:6},
+    {week:"Sem 4 (23-27 Mar)",puntual:33,tardanza:27,tolerancia:3}
+  ],
+  personas:[
+    {nombre:"ALARCON DIAZ ELIO",dias:24,verde:17,rojo:6,amarillo:1},
+    {nombre:"BAUTISTA QUISPE DIANA SALOME",dias:24,verde:3,rojo:20,amarillo:1},
+    {nombre:"CACERES SULLA KATHERINE MAYTE",dias:24,verde:2,rojo:18,amarillo:4},
+    {nombre:"CRIADO CORTEZ MIRIAN MARGARITA",dias:24,verde:4,rojo:15,amarillo:5},
+    {nombre:"GALLEGOS ROJAS DANNY MARIALINA",dias:11,verde:11,rojo:0,amarillo:0},
+    {nombre:"HUAMANI VICENTE NOE FRANCISCO",dias:24,verde:23,rojo:1,amarillo:0},
+    {nombre:"MENDOZA CORTEZ MIGUEL ANGEL",dias:24,verde:12,rojo:8,amarillo:4},
+    {nombre:"ROJAS INCA LJUBICA LOURDES",dias:24,verde:21,rojo:1,amarillo:2},
+    {nombre:"TENORIO GALLEGOS AMBAR YERALDINN",dias:24,verde:4,rojo:18,amarillo:2},
+    {nombre:"TENORIO GALLEGOS NINO ANTHONY",dias:24,verde:4,rojo:18,amarillo:2},
+    {nombre:"ZAPATA CARRERA MARTIN LEONARDO",dias:23,verde:17,rojo:4,amarillo:2}
+  ]
+}
 };
 
-// ============ HELPERS ============
 const fmt = n => 'S/ '+n.toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pct = n => n.toFixed(1)+'%';
-const chartColors = {
-  purple:'#6C2BD9',purpleLight:'rgba(108,43,217,.15)',
-  red:'#E11D48',redLight:'rgba(225,29,72,.12)',
-  amber:'#F59E0B',amberLight:'rgba(245,158,11,.12)',
-  green:'#10B981',greenLight:'rgba(16,185,129,.12)',
-  blue:'#3B82F6',blueLight:'rgba(59,130,246,.12)',
-  pink:'#EC4899',gray:'#94A3B8'
-};
+const pct = n => (typeof n==='number'?n:parseFloat(n)).toFixed(1)+'%';
 const defaultOpts = {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{grid:{color:'#F1F5F9'},ticks:{font:{size:11}}}}};
 
-function makeKPI(id,icon,color,label,value,sub=''){
-  return `<div class="kpi-card ${color}"><div class="kpi-icon ${color}">${icon}</div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div>`;
+function makeKPI(color,icon,label,value,sub){
+  return `<div class="kpi-card ${color}"><div class="kpi-icon ${color}">${icon}</div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub||''}</div></div>`;
 }
 
-// ============ TAB NAVIGATION ============
-const titles = {'tab-data':'Data de Trabajadores','tab-planilla':'Planilla Mensual','tab-clima':'Ind. Clima Laboral','tab-desempeno':'Ind. Evaluación de Desempeño','tab-rotacion':'Ind. Rotación de Personal','tab-capacitaciones':'Ind. Capacitaciones','tab-contratos':'Ind. Contratos','tab-asistencia':'Ind. Asistencia'};
+// EDIT MODE
+let editMode = false;
+function toggleEdit(){
+  editMode = !editMode;
+  const btn = document.getElementById('editBtn');
+  const banner = document.getElementById('editBanner');
+  btn.classList.toggle('on', editMode);
+  btn.textContent = editMode ? '✅ Finalizar edición' : '✏️ Editar valores';
+  banner.classList.toggle('show', editMode);
+  document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', editMode ? 'true' : 'false'));
+}
+
+// NAV
+const titles = {'tab-resumen':'Resumen General','tab-data':'Data de Trabajadores','tab-planilla':'Planilla — Marzo 2026','tab-clima':'Ind. Clima Laboral','tab-desempeno':'Ind. Evaluación de Desempeño','tab-rotacion':'Ind. Rotación de Personal','tab-capacitaciones':'Ind. Capacitaciones','tab-contratos':'Ind. Contratos','tab-asistencia':'Ind. Asistencia'};
 document.querySelectorAll('.nav-item').forEach(item=>{
   item.addEventListener('click',()=>{
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
     item.classList.add('active');
     document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-    const tab = item.dataset.tab;
+    const tab=item.dataset.tab;
     document.getElementById(tab).classList.add('active');
-    document.getElementById('pageTitle').textContent = titles[tab]||'Dashboard';
+    document.getElementById('pageTitle').textContent=titles[tab]||'Dashboard';
   });
 });
 
-// ============ TAB 1: DATA TRABAJADORES ============
+// ============ RESUMEN ============
 (function(){
-  const t = DATA.trabajadores;
-  const m = t.filter(x=>x.Sexo==='M').length, f=t.length-m;
-  const afp = t.filter(x=>x["AFP/ONP"]&&x["AFP/ONP"].startsWith('AFP')).length;
-  const onp = t.filter(x=>x["AFP/ONP"]==='ONP').length;
-  document.getElementById('dataKPIs').innerHTML =
-    makeKPI('','👥','purple','Total Trabajadores',t.length,'Activos al cierre')+
-    makeKPI('','👨','blue','Masculino',m,pct(m/t.length*100))+
-    makeKPI('','👩','red','Femenino',f,pct(f/t.length*100))+
-    makeKPI('','🏦','green','AFP / ONP',afp+' / '+onp,'Sistema pensionario');
+  const indicadores = [
+    {nombre:'Evaluación de desempeño',meta:100,res:93.6,formula:'(Evaluados / Total trab.) × 100',color:'#6C2BD9'},
+    {nombre:'Rotación de personal',meta:10,res:4.08,formula:'(Bajas / Prom. trab.) × 100',color:'#10B981'},
+    {nombre:'Clima laboral',meta:85,res:85.8,formula:'(Puntaje obtenido / Máximo) × 100',color:'#3B82F6'},
+    {nombre:'Contratos renovados a tiempo',meta:100,res:100,formula:'(Renovados a tiempo / Total) × 100',color:'#10B981'},
+    {nombre:'Capacitaciones ejecutadas',meta:100,res:100,formula:'(Capacitaciones ejecutadas / Prog.) × 100',color:'#10B981'},
+  ];
+  // Rotación (meta=10): cumple si res<=meta → 100%, si no → penaliza proporcionalmente
+  // Resto: cumple si res>=meta → 100%, si no → res/meta*100
+  const scores = indicadores.map(i => {
+    if (i.meta === 10) return i.res <= i.meta ? 100 : Math.max(0, (1 - (i.res - i.meta) / i.meta) * 100);
+    return Math.min(100, (i.res / i.meta) * 100);
+  });
+  const global = Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*10)/10;
 
-  // Cargo chart
-  const cargos = {};
-  t.forEach(x=>{const c=x.CARGO.includes('CHOFER')?'CONDUCTOR':x.CARGO;cargos[c]=(cargos[c]||0)+1});
-  const sortedCargos = Object.entries(cargos).sort((a,b)=>b[1]-a[1]);
-  new Chart(document.getElementById('chartCargo'),{type:'bar',data:{labels:sortedCargos.map(x=>x[0]),datasets:[{data:sortedCargos.map(x=>x[1]),backgroundColor:['#6C2BD9','#E11D48','#F59E0B','#10B981','#3B82F6','#EC4899','#8B5CF6','#14B8A6','#F97316','#6366F1','#EF4444','#84CC16'],borderRadius:6,barThickness:28}]},options:{...defaultOpts,indexAxis:'horizontal',plugins:{legend:{display:false}},scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,ticks:{font:{size:10}}}}}});
+  document.getElementById('resumenKPIs').innerHTML =
+    makeKPI('purple','📊','Índice Global RRHH',global+'%','Promedio 5 indicadores clave')+
+    makeKPI('green','👥','Total Trabajadores','33','26 Masc. | 7 Fem.')+
+    makeKPI('blue','📝','Contratos Vigentes','30 / 33','3 a plazo indeterminado')+
+    makeKPI('amber','⏰','Puntualidad Marzo','47.2%','118 / 250 registros puntual');
 
-  // Genero chart
-  new Chart(document.getElementById('chartGenero'),{type:'doughnut',data:{labels:['Masculino','Femenino'],datasets:[{data:[m,f],backgroundColor:['#3B82F6','#EC4899'],borderWidth:0,cutout:'72%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:16,font:{size:12}}}}}});
+  const getC = (m,r) => {const ok=m===10?r<=m:r>=m; const w=m===10?(r<=m*1.5):r/m>=0.8; return ok?'#10B981':w?'#F59E0B':'#E11D48';};
+  const getS = (m,r) => {const ok=m===10?r<=m:r>=m; const w=m===10?(r<=m*1.5):r/m>=0.8; return ok?'badge-green':w?'badge-amber':'badge-red';};
+  const getL = (m,r) => {const ok=m===10?r<=m:r>=m; const w=m===10?(r<=m*1.5):r/m>=0.8; return ok?'CUMPLE':w?'PARCIAL':'ALERTA';};
 
-  // Table
-  let html='<table><thead><tr><th>#</th><th>DNI</th><th>Apellidos y Nombres</th><th>Cargo</th><th>Planilla</th><th>Sexo</th><th>AFP/ONP</th><th>Ingreso</th><th>Término</th></tr></thead><tbody>';
+  document.getElementById('resumenIndicadores').innerHTML = indicadores.map(i=>{
+    const bw = i.meta===10?Math.min(100,(i.meta/Math.max(i.res,.01))*100):Math.min(100,(i.res/i.meta)*100);
+    return `<div class="meta-row">
+      <div><div class="meta-name" contenteditable="false">${i.nombre}</div><div style="font-size:10px;color:var(--text-secondary);font-style:italic;margin-top:2px">${i.formula}</div></div>
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+        <div style="text-align:right;min-width:60px">
+          <div style="font-size:10px;color:var(--text-secondary)">Meta: ${i.meta}%</div>
+          <div class="meta-pct" style="color:${getC(i.meta,i.res)}" contenteditable="false">${i.res}%</div>
+        </div>
+        <div style="width:80px"><div class="progress-bar"><div class="progress-fill" style="width:${bw}%;background:${getC(i.meta,i.res)}"></div></div></div>
+        <span class="badge-sm ${getS(i.meta,i.res)}">${getL(i.meta,i.res)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  new Chart(document.getElementById('chartRadar'),{type:'radar',data:{labels:['Desempeño','Rotación','Clima Laboral','Contratos','Capacitación'],datasets:[
+    {label:'Resultado',data:[93.6, 100, 85.8, 100, 100],backgroundColor:'rgba(108,43,217,.15)',borderColor:'#6C2BD9',borderWidth:2,pointBackgroundColor:'#6C2BD9',pointRadius:5},
+    {label:'Meta',data:[100,100,100,100,100],backgroundColor:'rgba(16,185,129,.08)',borderColor:'#10B981',borderWidth:1.5,borderDash:[5,5],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:10}}}},plugins:{legend:{position:'bottom',labels:{font:{size:11}}}}}});
+
+  const areas = {'Conductores':20,'Administración':4,'Contabilidad':3,'Operaciones':2,'RRHH':2,'Servicios':2};
+  new Chart(document.getElementById('chartAreaPie'),{type:'doughnut',data:{labels:Object.keys(areas),datasets:[{data:Object.values(areas),backgroundColor:['#6C2BD9','#10B981','#F59E0B','#3B82F6','#EC4899','#94A3B8'],borderWidth:0,cutout:'62%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:10}}}}}});
+
+  new Chart(document.getElementById('chartGeneroRes'),{type:'doughnut',data:{labels:['Masculino (26)','Femenino (7)'],datasets:[{data:[26,7],backgroundColor:['#3B82F6','#EC4899'],borderWidth:0,cutout:'68%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}});
+
+  const p=DATA.planilla; const tN=p.reduce((s,x)=>s+x.neto,0), tD=p.reduce((s,x)=>s+x.descuentos,0), tE=p.reduce((s,x)=>s+x.essalud,0), tV=p.reduce((s,x)=>s+x.vida,0);
+  new Chart(document.getElementById('chartPlanRes'),{type:'doughnut',data:{labels:['Neto','Descuentos','EsSalud','Vida Ley'],datasets:[{data:[tN,tD,tE,tV],backgroundColor:['#10B981','#E11D48','#F59E0B','#3B82F6'],borderWidth:0,cutout:'62%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:10}}}}}});
+})();
+
+// ============ DATA TRABAJADORES ============
+(function(){
+  const t=DATA.trabajadores;
+  const m=t.filter(x=>x.Sexo==='M').length, f=t.length-m;
+  const afp=t.filter(x=>x["AFP/ONP"]&&x["AFP/ONP"].startsWith('AFP')).length;
+  const onp=t.filter(x=>x["AFP/ONP"]==='ONP').length;
+  document.getElementById('dataKPIs').innerHTML=
+    makeKPI('purple','👥','Total Trabajadores',t.length,'Activos al cierre de Marzo')+
+    makeKPI('blue','👨','Masculino',m,pct(m/t.length*100))+
+    makeKPI('red','👩','Femenino',f,pct(f/t.length*100))+
+    makeKPI('green','🏦','AFP / ONP',afp+' / '+onp,'Sistema pensionario');
+
+  const cargos={};
+  t.forEach(x=>{const c=x.CARGO.includes('CHOFER')?'CONDUCTOR':x.CARGO; cargos[c]=(cargos[c]||0)+1;});
+  const sc=Object.entries(cargos).sort((a,b)=>b[1]-a[1]);
+  new Chart(document.getElementById('chartCargo'),{type:'bar',data:{labels:sc.map(x=>x[0]),datasets:[{data:sc.map(x=>x[1]),backgroundColor:['#6C2BD9','#E11D48','#F59E0B','#10B981','#3B82F6','#EC4899','#8B5CF6','#14B8A6','#F97316'],borderRadius:6,barThickness:26}]},options:{...defaultOpts,indexAxis:'y',scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,ticks:{font:{size:10}}}}}});
+  new Chart(document.getElementById('chartGenero'),{type:'doughnut',data:{labels:['Masculino','Femenino'],datasets:[{data:[m,f],backgroundColor:['#3B82F6','#EC4899'],borderWidth:0,cutout:'72%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
+
+  const now=new Date('2026-03-28');
+  let html='<table><thead><tr><th>#</th><th>DNI</th><th>Apellidos y Nombres</th><th>Cargo</th><th>Planilla</th><th>Sexo</th><th>AFP/ONP</th><th>Ingreso</th><th>Término</th><th>Días Rest.</th></tr></thead><tbody>';
   t.forEach((x,i)=>{
-    const badge = x.TERMINO==='INDETERMINADO'?'<span class="badge-sm badge-green">Indeterminado</span>':x.TERMINO==='N/A'?'<span class="badge-sm badge-amber">RH</span>':'<span class="badge-sm badge-blue">'+x.TERMINO+'</span>';
-    html+=`<tr><td>${i+1}</td><td>${x.NroDoc}</td><td>${x.APENON}</td><td>${x.CARGO}</td><td><span class="badge-sm badge-purple">${x.PLANILLA}</span></td><td>${x.Sexo}</td><td>${x["AFP/ONP"]}</td><td>${x.INGRESO}</td><td>${badge}</td></tr>`;
+    let badge,dias='—';
+    if(x.TERMINO==='INDETERMINADO'){badge='<span class="badge-sm badge-green">Indeterminado</span>';}
+    else if(x.TERMINO==='N/A'){badge='<span class="badge-sm badge-amber">Rec. Honorarios</span>';}
+    else{const d=new Date(x.TERMINO);const diff=Math.ceil((d-now)/(1000*60*60*24));dias=diff;const col=diff<=0?'badge-red':diff<=30?'badge-amber':diff<=90?'badge-blue':'badge-green';const est=diff<=0?'VENCIDO':diff<=30?'URGENTE':diff<=90?'PRÓXIMO':'VIGENTE';badge=`<span class="badge-sm ${col}">${est} (${x.TERMINO})</span>`;}
+    html+=`<tr><td>${i+1}</td><td style="font-family:monospace">${x.NroDoc}</td><td style="font-weight:600">${x.APENON}</td><td>${x.CARGO}</td><td><span class="badge-sm badge-purple">${x.PLANILLA}</span></td><td>${x.Sexo}</td><td>${x["AFP/ONP"]}</td><td>${x.INGRESO}</td><td>${badge}</td><td style="font-weight:700;text-align:right">${dias}</td></tr>`;
   });
   html+='</tbody></table>';
   document.getElementById('tblTrabajadores').innerHTML=html;
 })();
 
-// ============ TAB 2: PLANILLA ============
+// ============ PLANILLA ============
 (function(){
-  const p = DATA.planilla;
-  const totBruto = p.reduce((s,x)=>s+x.ingreso,0);
-  const totDesc = p.reduce((s,x)=>s+x.descuentos,0);
-  const totEssalud = p.reduce((s,x)=>s+x.essalud,0);
-  const totVida = p.reduce((s,x)=>s+x.vida,0);
-  const totNeto = p.reduce((s,x)=>s+x.neto,0);
-  const totAport = totEssalud+totVida;
+  const p=DATA.planilla;
+  const tB=p.reduce((s,x)=>s+x.ingreso,0),tD=p.reduce((s,x)=>s+x.descuentos,0),tE=p.reduce((s,x)=>s+x.essalud,0),tV=p.reduce((s,x)=>s+x.vida,0),tN=p.reduce((s,x)=>s+x.neto,0);
+  document.getElementById('planillaKPIs').innerHTML=
+    makeKPI('purple','💵','Costo Bruto Mensual',fmt(tB),'Total ingresos planilla')+
+    makeKPI('red','📉','Total Descuentos Trabajador',fmt(tD),'Pensiones + Renta 5ta')+
+    makeKPI('amber','🏥','Aportaciones Empleador',fmt(tE+tV),'EsSalud + Vida Ley')+
+    makeKPI('green','💰','Neto a Pagar',fmt(tN),'Total remuneración neta');
 
-  document.getElementById('planillaKPIs').innerHTML =
-    makeKPI('','💵','purple','Costo Bruto Mensual',fmt(totBruto),'Total ingresos')+
-    makeKPI('','📉','red','Total Descuentos',fmt(totDesc),'Pensiones + Renta 5ta')+
-    makeKPI('','🏥','amber','Aportaciones (EsSalud+Vida)',fmt(totAport),`EsSalud: ${fmt(totEssalud)}`)+
-    makeKPI('','💰','green','Neto a Pagar',fmt(totNeto),'Total remuneración neta');
-
-  // Bar chart - top 10 sueldos
-  const sorted = [...p].sort((a,b)=>b.ingreso-a.ingreso).slice(0,12);
+  const sorted=[...p].sort((a,b)=>b.ingreso-a.ingreso).slice(0,12);
   new Chart(document.getElementById('chartPlanillaDist'),{type:'bar',data:{labels:sorted.map(x=>x.nombre.split(' ').slice(0,2).join(' ')),datasets:[
-    {label:'Ingreso Bruto',data:sorted.map(x=>x.ingreso),backgroundColor:'rgba(108,43,217,.7)',borderRadius:4,barThickness:18},
-    {label:'Neto',data:sorted.map(x=>x.neto),backgroundColor:'rgba(16,185,129,.7)',borderRadius:4,barThickness:18}
+    {label:'Ingreso Bruto',data:sorted.map(x=>x.ingreso),backgroundColor:'rgba(108,43,217,.7)',borderRadius:4,barThickness:16},
+    {label:'Neto',data:sorted.map(x=>x.neto),backgroundColor:'rgba(16,185,129,.7)',borderRadius:4,barThickness:16}
   ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top',labels:{font:{size:11}}}},scales:{...defaultOpts.scales,x:{...defaultOpts.scales.x,ticks:{font:{size:9},maxRotation:45}}}}});
+  new Chart(document.getElementById('chartPlanillaPie'),{type:'doughnut',data:{labels:['Neto a Pagar','Desc. Trabajador','EsSalud (9%)','Vida Ley (0.53%)'],datasets:[{data:[tN,tD,tE,tV],backgroundColor:['#10B981','#E11D48','#F59E0B','#3B82F6'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}});
 
-  // Pie
-  new Chart(document.getElementById('chartPlanillaPie'),{type:'doughnut',data:{labels:['Neto a Pagar','Descuentos Trabajador','EsSalud','Vida Ley'],datasets:[{data:[totNeto,totDesc,totEssalud,totVida],backgroundColor:['#10B981','#E11D48','#F59E0B','#3B82F6'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}});
-
-  // Table
   let html='<table><thead><tr><th>#</th><th>Trabajador</th><th>Cargo</th><th>Sistema</th><th>Sueldo</th><th>Ingreso Bruto</th><th>Descuentos</th><th>EsSalud</th><th>Vida Ley</th><th>Neto</th></tr></thead><tbody>';
   p.forEach(x=>{
     html+=`<tr><td>${x.num}</td><td>${x.nombre}</td><td>${x.cargo}</td><td><span class="badge-sm badge-purple">${x.sistema}</span></td><td>${fmt(x.sueldo)}</td><td>${fmt(x.ingreso)}</td><td style="color:#E11D48">${fmt(x.descuentos)}</td><td>${fmt(x.essalud)}</td><td>${fmt(x.vida)}</td><td style="font-weight:700;color:#059669">${fmt(x.neto)}</td></tr>`;
   });
-  html+=`<tr style="background:#F0F2F8;font-weight:700"><td></td><td>TOTALES</td><td></td><td></td><td></td><td>${fmt(totBruto)}</td><td style="color:#E11D48">${fmt(totDesc)}</td><td>${fmt(totEssalud)}</td><td>${fmt(totVida)}</td><td style="color:#059669">${fmt(totNeto)}</td></tr>`;
+  html+=`<tr style="background:#F0F2F8;font-weight:700"><td colspan="4">TOTALES</td><td></td><td>${fmt(tB)}</td><td style="color:#E11D48">${fmt(tD)}</td><td>${fmt(tE)}</td><td>${fmt(tV)}</td><td style="color:#059669">${fmt(tN)}</td></tr>`;
   html+='</tbody></table>';
   document.getElementById('tblPlanilla').innerHTML=html;
 })();
 
-// ============ TAB 3: CLIMA LABORAL ============
+// ============ CLIMA ============
 (function(){
-  const c = DATA.clima;
-  const avg = c.reduce((s,x)=>s+x.prom,0)/c.length;
-  const best = c.reduce((a,b)=>a.prom>b.prom?a:b);
-  const worst = c.reduce((a,b)=>a.prom<b.prom?a:b);
+  const c=DATA.clima;
+  const avgPct=c.reduce((s,x)=>s+x.pct,0)/c.length;
+  const best=c.reduce((a,b)=>a.pct>b.pct?a:b);
+  const worst=c.reduce((a,b)=>a.pct<b.pct?a:b);
+  const excl=c.filter(x=>x.nivel==='Excelente').length;
+  document.getElementById('climaKPIs').innerHTML=
+    makeKPI('purple','🌡️','% Clima Laboral (Promedio)',pct(avgPct),'(Puntaje obtenido / Máximo) × 100')+
+    makeKPI('green','😊','Mejor Resultado',pct(best.pct),best.area+' — '+best.nivel)+
+    makeKPI('red','😟','Resultado Más Bajo',pct(worst.pct),worst.area+' — '+worst.nivel);
 
-  document.getElementById('climaKPIs').innerHTML =
-    makeKPI('','🌡️','purple','Promedio Anual',avg.toFixed(2)+' / 5.0','Escala 1-5')+
-    makeKPI('','😊','green','Mejor Mes',best.prom+' - '+best.Mes,best.area)+
-    makeKPI('','😟','red','Mes más Bajo',worst.prom+' - '+worst.Mes,worst.area);
+  // Gauge
+  const gc=document.getElementById('gaugeClima').getContext('2d');
+  const cx=100,cy=100,r=75,lw=18;
+  gc.beginPath();gc.arc(cx,cy,r,Math.PI,2*Math.PI);gc.strokeStyle='#E2E8F0';gc.lineWidth=lw;gc.stroke();
+  const fillA=(avgPct/100)*Math.PI;
+  gc.beginPath();gc.arc(cx,cy,r,Math.PI,Math.PI+fillA);gc.strokeStyle=avgPct>=85?'#10B981':avgPct>=70?'#3B82F6':'#E11D48';gc.lineWidth=lw;gc.lineCap='round';gc.stroke();
+  document.getElementById('climaGaugeVal').textContent=pct(avgPct);
 
-  new Chart(document.getElementById('chartClima'),{type:'line',data:{labels:c.map(x=>x.Mes),datasets:[{label:'Promedio',data:c.map(x=>x.prom),borderColor:'#6C2BD9',backgroundColor:'rgba(108,43,217,.1)',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:'#6C2BD9',borderWidth:2.5}]},options:{...defaultOpts,scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:1,max:5,ticks:{stepSize:1,font:{size:11}}}}}});
+  const areaMap={};
+  c.forEach(x=>{areaMap[x.area]=(areaMap[x.area]||[]).concat(x.pct);});
+  document.getElementById('climaBarras').innerHTML=Object.entries(areaMap).map(([area,vals])=>{
+    const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+    const col=avg>=90?'#10B981':avg>=80?'#3B82F6':avg>=70?'#F59E0B':'#E11D48';
+    return `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${area}</span><span style="font-weight:700;color:${col}">${pct(avg)}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${avg}%;background:${col}"></div></div></div>`;
+  }).join('');
 
-  // Radar
-  const avgP = [1,2,3,4,5].map(i=>c.reduce((s,x)=>s+x['p'+i],0)/c.length);
-  new Chart(document.getElementById('chartClimaRadar'),{type:'radar',data:{labels:['Pregunta 1','Pregunta 2','Pregunta 3','Pregunta 4','Pregunta 5'],datasets:[{label:'Promedio',data:avgP,backgroundColor:'rgba(108,43,217,.15)',borderColor:'#6C2BD9',borderWidth:2,pointBackgroundColor:'#6C2BD9',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{size:10}}}},plugins:{legend:{display:false}}}});
+  const avgP=[1,2,3,4,5].map(i=>c.reduce((s,x)=>s+x['p'+i],0)/c.length);
+  new Chart(document.getElementById('chartClimaRadar'),{type:'radar',data:{labels:['P1: Satisfacción General','P2: Liderazgo','P3: Comunicación','P4: Trabajo en Equipo','P5: Condiciones Laborales'],datasets:[
+    {label:'Promedio Equipo',data:avgP,backgroundColor:'rgba(108,43,217,.15)',borderColor:'#6C2BD9',borderWidth:2,pointBackgroundColor:'#6C2BD9',pointRadius:4},
+    {label:'Meta (5.0)',data:[5,5,5,5,5],backgroundColor:'rgba(16,185,129,.05)',borderColor:'#10B981',borderWidth:1.5,borderDash:[5,5],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{size:10}}}},plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11}}}}}});
 
-  let html='<table><thead><tr><th>Mes</th><th>Área</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th><th>Promedio</th></tr></thead><tbody>';
-  c.forEach(x=>{
-    const color=x.prom>=4?'badge-green':x.prom>=3.5?'badge-amber':'badge-red';
-    html+=`<tr><td>${x.Mes}</td><td>${x.area}</td><td>${x.p1}</td><td>${x.p2}</td><td>${x.p3}</td><td>${x.p4}</td><td>${x.p5}</td><td><span class="badge-sm ${color}">${x.prom}</span></td></tr>`;
+  let html='<table><thead><tr><th>#</th><th>Área</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th><th>Total</th><th>Promedio</th><th>% Clima</th><th>Nivel</th></tr></thead><tbody>';
+  c.forEach((x,i)=>{
+    const col=x.pct>=90?'badge-green':x.pct>=80?'badge-blue':x.pct>=70?'badge-amber':'badge-red';
+    html+=`<tr><td>${i+1}</td><td>${x.area}</td><td>${x.p1}</td><td>${x.p2}</td><td>${x.p3}</td><td>${x.p4}</td><td>${x.p5}</td><td>${x.total}</td><td>${x.prom.toFixed(1)}</td><td><span class="badge-sm ${col}">${x.pct}%</span></td><td><span class="badge-sm ${col}">${x.nivel}</span></td></tr>`;
   });
+  const totals=[1,2,3,4,5].map(i=>c.reduce((s,x)=>s+x['p'+i],0));
+  html+=`<tr style="background:#F0F2F8;font-weight:700"><td colspan="2">PROMEDIOS</td>${totals.map(v=>`<td>${(v/c.length).toFixed(1)}</td>`).join('')}<td>${c.reduce((s,x)=>s+x.total,0)}</td><td>${(c.reduce((s,x)=>s+x.prom,0)/c.length).toFixed(2)}</td><td><span class="badge-sm badge-green">${pct(avgPct)}</span></td><td>—</td></tr>`;
   html+='</tbody></table>';
   document.getElementById('tblClima').innerHTML=html;
 })();
 
-// ============ TAB 4: EVALUACION DESEMPEÑO ============
+// ============ DESEMPEÑO ============
 (function(){
-  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic'];
-  const evaluados = [28,30,27,31,29,33,30,28,32,33,31,33];
-  const total = 33;
-  const pcts = evaluados.map(e=>(e/total*100));
-  const avgPct = pcts.reduce((s,v)=>s+v,0)/pcts.length;
-  const calificaciones = {Excelente:8,Bueno:14,Regular:7,Deficiente:4};
+  const d=DATA.desempeno;
+  const avgPct=d.reduce((s,x)=>s+x.pct,0)/d.length;
+  const excl=d.filter(x=>x.nivel==='Excelente').length;
+  const bueno=d.filter(x=>x.nivel==='Bueno').length;
+  document.getElementById('desempenoKPIs').innerHTML=
+    makeKPI('purple','⭐','% Promedio Desempeño',pct(avgPct),'(Puntaje obtenido / Máximo) × 100')+
+    makeKPI('green','🏆','Calificación Excelente',excl+' trabajadores',pct(excl/d.length*100))+
+    makeKPI('blue','👍','Calificación Bueno',bueno+' trabajadores',pct(bueno/d.length*100))+
+    makeKPI('amber','📋','Total Evaluados',d.length,'Marzo 2026 — 11/33 admin.');
 
-  document.getElementById('desempenoKPIs').innerHTML =
-    makeKPI('','⭐','purple','% Evaluados (Prom.)',pct(avgPct),'(Evaluados / Total) × 100')+
-    makeKPI('','📊','green','Total Evaluaciones',evaluados.reduce((s,v)=>s+v,0),'Acumulado anual')+
-    makeKPI('','🏆','amber','Excelente + Bueno',(calificaciones.Excelente+calificaciones.Bueno)+' trabajadores',pct((calificaciones.Excelente+calificaciones.Bueno)/total*100))+
-    makeKPI('','⚠️','red','Regular + Deficiente',(calificaciones.Regular+calificaciones.Deficiente)+' trabajadores',pct((calificaciones.Regular+calificaciones.Deficiente)/total*100));
+  const sorted=[...d].sort((a,b)=>b.pct-a.pct);
+  new Chart(document.getElementById('chartDesempeno'),{type:'bar',data:{
+    labels:sorted.map(x=>x.trabajador.split(' ').slice(0,2).join(' ')),
+    datasets:[
+      {label:'% Desempeño',data:sorted.map(x=>x.pct),backgroundColor:sorted.map(x=>x.pct>=90?'#10B981':x.pct>=80?'#3B82F6':'#F59E0B'),borderRadius:6,barThickness:22},
+      {label:'Meta 100%',data:Array(d.length).fill(100),type:'line',borderColor:'#E11D48',borderDash:[5,5],borderWidth:1.5,pointRadius:0}
+    ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:70,max:105,ticks:{callback:v=>v+'%'}},x:{...defaultOpts.scales.x,ticks:{font:{size:9},maxRotation:35}}}}});
 
-  new Chart(document.getElementById('chartDesempeno'),{type:'line',data:{labels:meses,datasets:[{label:'% Evaluados',data:pcts,borderColor:'#6C2BD9',backgroundColor:'rgba(108,43,217,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#6C2BD9',borderWidth:2.5},{label:'Meta 100%',data:Array(12).fill(100),borderColor:'#E11D48',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:70,max:105}}}});
+  new Chart(document.getElementById('chartDesempenoDist'),{type:'doughnut',data:{labels:['Excelente','Bueno'],datasets:[{data:[excl,bueno],backgroundColor:['#10B981','#3B82F6'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
 
-  new Chart(document.getElementById('chartDesempenoDist'),{type:'doughnut',data:{labels:Object.keys(calificaciones),datasets:[{data:Object.values(calificaciones),backgroundColor:['#10B981','#3B82F6','#F59E0B','#E11D48'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
+  let html='<table><thead><tr><th>#</th><th>Trabajador</th><th>Área</th><th>Responsab.</th><th>Trabajo Equipo</th><th>Comunicación</th><th>Cumpl. Obj.</th><th>Calidad</th><th>Puntualidad</th><th>Total</th><th>% Desempeño</th><th>Nivel</th></tr></thead><tbody>';
+  d.forEach((x,i)=>{
+    const col=x.pct>=90?'badge-green':x.pct>=80?'badge-blue':'badge-amber';
+    html+=`<tr><td>${i+1}</td><td style="font-weight:600">${x.trabajador}</td><td>${x.area}</td><td>${x.r}</td><td>${x.te}</td><td>${x.c}</td><td>${x.co}</td><td>${x.ct}</td><td>${x.p}</td><td style="font-weight:700">${x.total}/30</td><td><span class="badge-sm ${col}">${pct(x.pct)}</span></td><td><span class="badge-sm ${col}">${x.nivel}</span></td></tr>`;
+  });
+  html+='</tbody></table>';
+  document.getElementById('tblDesempeno').innerHTML=html;
 })();
 
-// ============ TAB 5: ROTACION ============
+// ============ ROTACION ============
 (function(){
-  const r = DATA.rotacion;
-  const totalSal = r.reduce((s,x)=>s+x.sal,0);
-  const avgRot = r.map(x=>x.sal/((x.ini+x.fin)/2)*100);
-  const avgRotPct = avgRot.reduce((s,v)=>s+v,0)/avgRot.length;
-  const worstMonth = r.reduce((a,b)=>a.sal>b.sal?a:b);
+  const r=DATA.rotacion;
+  const totalSal=r.reduce((s,x)=>s+x.sal,0);
+  const avgRot=r.reduce((s,x)=>s+x.pct,0)/r.length;
+  document.getElementById('rotacionKPIs').innerHTML=
+    makeKPI('purple','🔄','Rotación Promedio Acum.',pct(avgRot),'(Bajas / Prom. Trabajadores) × 100')+
+    makeKPI('red','📉','Total Salidas (Ene-Mar)',totalSal,'1 renuncia voluntaria (Feb)')+
+    makeKPI('green','✅','Meses Sin Rotación','2 / 3','Enero y Marzo sin salidas')+
+    makeKPI('amber','⚠️','Mes Crítico','FEBRERO','1 renuncia voluntaria');
 
-  document.getElementById('rotacionKPIs').innerHTML =
-    makeKPI('','🔄','purple','Rotación Promedio',pct(avgRotPct),'(Bajas / Prom. Trab.) × 100')+
-    makeKPI('','📉','red','Total Salidas (Anual)',totalSal,'100% voluntarias')+
-    makeKPI('','⚠️','amber','Mes Crítico',worstMonth.mes,worstMonth.sal+' salidas')+
-    makeKPI('','✅','green','Mejor Mes','DIC','0 salidas');
+  new Chart(document.getElementById('chartRotacion'),{type:'line',data:{labels:r.map(x=>x.mes),datasets:[
+    {label:'% Rotación',data:r.map(x=>x.pct),borderColor:'#E11D48',backgroundColor:'rgba(225,29,72,.08)',fill:true,tension:.3,pointRadius:6,pointBackgroundColor:'#E11D48',borderWidth:2.5},
+    {label:'Meta ≤ 10%',data:r.map(()=>10),borderColor:'#10B981',borderDash:[5,5],borderWidth:1.5,pointRadius:0}
+  ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:0,max:12,ticks:{callback:v=>v+'%'}}}}});
 
-  new Chart(document.getElementById('chartRotacion'),{type:'line',data:{labels:r.map(x=>x.mes),datasets:[{label:'% Rotación',data:avgRot,borderColor:'#E11D48',backgroundColor:'rgba(225,29,72,.08)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#E11D48',borderWidth:2.5}]},options:{...defaultOpts,scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:0}}}});
+  new Chart(document.getElementById('chartRotacionBar'),{type:'bar',data:{labels:r.map(x=>x.mes),datasets:[
+    {label:'Renuncias',data:r.map(x=>x.ren),backgroundColor:'#F59E0B',borderRadius:4},
+    {label:'Despidos',data:r.map(x=>x.desp),backgroundColor:'#E11D48',borderRadius:4}
+  ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,x:{stacked:true},y:{...defaultOpts.scales.y,stacked:true,ticks:{stepSize:1}}}}});
 
-  new Chart(document.getElementById('chartRotacionBar'),{type:'bar',data:{labels:r.map(x=>x.mes),datasets:[{label:'Renuncias',data:r.map(x=>x.ren),backgroundColor:'#F59E0B',borderRadius:4},{label:'Despidos',data:r.map(x=>x.desp),backgroundColor:'#E11D48',borderRadius:4}]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,x:{...defaultOpts.scales.x,stacked:true},y:{...defaultOpts.scales.y,stacked:true}}}});
-
-  let html='<table><thead><tr><th>Mes</th><th>Inicio</th><th>Final</th><th>Salidas</th><th>Renuncias</th><th>Despidos</th><th>% Rotación</th></tr></thead><tbody>';
-  r.forEach((x,i)=>{
-    const pctVal = avgRot[i];
-    const color=pctVal>15?'badge-red':pctVal>5?'badge-amber':'badge-green';
-    html+=`<tr><td>${x.mes}</td><td>${x.ini}</td><td>${x.fin}</td><td>${x.sal}</td><td>${x.ren}</td><td>${x.desp}</td><td><span class="badge-sm ${color}">${pct(pctVal)}</span></td></tr>`;
+  let html='<table><thead><tr><th>Mes</th><th>Inicio</th><th>Final</th><th>Salidas</th><th>Renuncias Vol.</th><th>Despidos</th><th>Prom. Trabajadores</th><th>% Rotación</th><th>Semáforo</th></tr></thead><tbody>';
+  r.forEach(x=>{
+    const col=x.pct>10?'badge-red':x.pct>5?'badge-amber':'badge-green';
+    const est=x.pct>10?'CRÍTICO':x.pct>5?'MODERADO':x.pct===0?'SIN ROTACIÓN':'NORMAL';
+    html+=`<tr><td style="font-weight:600">${x.mes}</td><td>${x.ini}</td><td>${x.fin}</td><td style="font-weight:700">${x.sal}</td><td>${x.ren}</td><td>${x.desp}</td><td>${x.prom}</td><td><span class="badge-sm ${col}">${pct(x.pct)}</span></td><td><span class="badge-sm ${col}">${est}</span></td></tr>`;
   });
+  const totRow={sal:totalSal,ren:r.reduce((s,x)=>s+x.ren,0),desp:r.reduce((s,x)=>s+x.desp,0)};
+  html+=`<tr style="background:#F0F2F8;font-weight:700"><td>ACUMULADO</td><td>—</td><td>—</td><td>${totRow.sal}</td><td>${totRow.ren}</td><td>${totRow.desp}</td><td>—</td><td colspan="2"><span class="badge-sm badge-green">${pct(avgRot)} prom.</span></td></tr>`;
   html+='</tbody></table>';
   document.getElementById('tblRotacion').innerHTML=html;
 })();
 
-// ============ TAB 6: CAPACITACIONES ============
+// ============ CAPACITACIONES ============
 (function(){
-  const c = DATA.capacitaciones;
-  const ca = DATA.capArea;
-  const totalProg = c.reduce((s,x)=>s+x.count,0);
-  const avgPct = c.reduce((s,x)=>s+(x.cap/x.total*100),0)/c.length;
+  const c=DATA.capacitaciones;
+  const totTotal=c.reduce((s,x)=>s+x.total,0);
+  const totCap=c.reduce((s,x)=>s+x.cap,0);
+  document.getElementById('capKPIs').innerHTML=
+    makeKPI('green','📚','% Cumplimiento','100%','(Cap. ejecutadas / Programadas) × 100')+
+    makeKPI('purple','👥','Total Capacitados',totCap+' / '+totTotal,'Todas las áreas al 100%')+
+    makeKPI('blue','📅','Última Capacitación','25/03/2026','Presencial — Sede Nazca');
 
-  document.getElementById('capKPIs').innerHTML =
-    makeKPI('','📚','purple','% Cumplimiento Promedio',pct(avgPct),'(Cap. ejecutadas / Programadas) × 100')+
-    makeKPI('','🎯','green','Total Capacitaciones',totalProg,'Programadas anual: '+totalProg)+
-    makeKPI('','👥','blue','Personal Capacitado (Prom.)',Math.round(c.reduce((s,x)=>s+x.cap,0)/12),'Por mes');
+  new Chart(document.getElementById('chartCapArea'),{type:'bar',data:{labels:c.map(x=>x.area),datasets:[
+    {label:'Total',data:c.map(x=>x.total),backgroundColor:'rgba(108,43,217,.25)',borderRadius:4,barThickness:28},
+    {label:'Capacitados',data:c.map(x=>x.cap),backgroundColor:'#6C2BD9',borderRadius:4,barThickness:28}
+  ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}}}});
 
-  new Chart(document.getElementById('chartCap'),{type:'bar',data:{labels:c.map(x=>x.month),datasets:[{label:'% Cumplimiento',data:c.map(x=>(x.cap/x.total*100)),backgroundColor:c.map(x=>(x.cap/x.total*100)>=95?'#10B981':'#F59E0B'),borderRadius:6,barThickness:24}]},options:{...defaultOpts,scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:80,max:100,ticks:{callback:v=>v+'%'}}}}});
-
-  new Chart(document.getElementById('chartCapArea'),{type:'bar',data:{labels:ca.map(x=>x.area),datasets:[{label:'Total',data:ca.map(x=>x.total),backgroundColor:'rgba(108,43,217,.3)',borderRadius:4},{label:'Capacitado',data:ca.map(x=>x.cap),backgroundColor:'#6C2BD9',borderRadius:4}]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}}}});
+  let html='<table><thead><tr><th>#</th><th>Tema</th><th>Área</th><th>Pers. Total</th><th>Pers. Capacitado</th><th>Fecha</th><th>Tipo</th><th>% Cumplimiento</th></tr></thead><tbody>';
+  c.forEach((x,i)=>{
+    html+=`<tr><td>${i+1}</td><td>${x.tema}</td><td>${x.area}</td><td>${x.total}</td><td style="font-weight:700">${x.cap}</td><td>${x.fecha}</td><td><span class="badge-sm badge-blue">${x.tipo}</span></td><td><span class="badge-sm badge-green">${x.pct}%</span></td></tr>`;
+  });
+  html+=`<tr style="background:#F0F2F8;font-weight:700"><td></td><td>TOTAL</td><td>4 áreas</td><td>${totTotal}</td><td>${totCap}</td><td colspan="2"></td><td><span class="badge-sm badge-green">100%</span></td></tr>`;
+  html+='</tbody></table>';
+  document.getElementById('tblCap').innerHTML=html;
 })();
 
-// ============ TAB 7: CONTRATOS ============
+// ============ CONTRATOS ============
 (function(){
-  const t = DATA.trabajadores;
-  const indet = t.filter(x=>x.TERMINO==='INDETERMINADO').length;
-  const plazo = t.filter(x=>x.TERMINO!=='INDETERMINADO'&&x.TERMINO!=='N/A').length;
-  const rh = t.filter(x=>x.TERMINO==='N/A').length;
+  const t=DATA.trabajadores;
+  const now=new Date('2026-03-28');
+  const indet=t.filter(x=>x.TERMINO==='INDETERMINADO').length;
+  const rh=t.filter(x=>x.TERMINO==='N/A').length;
+  const plazo=t.filter(x=>x.TERMINO!=='INDETERMINADO'&&x.TERMINO!=='N/A').length;
 
-  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic'];
-  const renovTiempo = [10,9,10,8,10,9,10,10,9,10,10,10];
-  const totalRenov =  [10,10,10,10,10,10,10,10,10,10,10,10];
-  const pctRenov = renovTiempo.map((v,i)=>(v/totalRenov[i]*100));
+  const withDates=t.filter(x=>x.TERMINO!=='INDETERMINADO'&&x.TERMINO!=='N/A').map(x=>{
+    const d=new Date(x.TERMINO);const diff=Math.ceil((d-now)/(1000*60*60*24));
+    return {...x,dias:diff};
+  }).sort((a,b)=>a.dias-b.dias);
 
-  document.getElementById('contratosKPIs').innerHTML =
-    makeKPI('','📝','purple','% Renov. a Tiempo (Prom.)',pct(pctRenov.reduce((s,v)=>s+v,0)/12),'(Renov. a tiempo / Total) × 100')+
-    makeKPI('','♾️','green','Indeterminados',indet,'Contratos vigentes')+
-    makeKPI('','📄','blue','Plazo Fijo',plazo,'Contratos con término')+
-    makeKPI('','🏷️','amber','Recibo por Honorarios',rh,'Sin beneficios');
+  const venc=withDates.filter(x=>x.dias<=0).length;
+  const urg=withDates.filter(x=>x.dias>0&&x.dias<=30).length;
+  const prox=withDates.filter(x=>x.dias>30&&x.dias<=90).length;
 
-  new Chart(document.getElementById('chartContratos'),{type:'line',data:{labels:meses,datasets:[{label:'% Renovaciones a tiempo',data:pctRenov,borderColor:'#6C2BD9',backgroundColor:'rgba(108,43,217,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#6C2BD9',borderWidth:2.5},{label:'Meta 100%',data:Array(12).fill(100),borderColor:'#10B981',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,y:{...defaultOpts.scales.y,min:70,max:105}}}});
+  document.getElementById('contratosKPIs').innerHTML=
+    makeKPI('purple','📝','Contratos a Plazo Fijo',plazo,'Con fecha de término')+
+    makeKPI('green','♾️','Indeterminados',indet,'Sin fecha de vencimiento')+
+    makeKPI('amber','🏷️','Rec. Honorarios',rh,'Sin beneficios sociales')+
+    makeKPI(urg>0?'red':'green','⚠️','Urgentes (≤30 días)',urg,venc>0?venc+' vencidos':'Todos vigentes');
+
+  // Bar chart - dias restantes por trabajador
+  const top15=withDates.slice(0,15);
+  new Chart(document.getElementById('chartContratos'),{type:'bar',data:{
+    labels:top15.map(x=>x.APENON.split(' ').slice(0,2).join(' ')),
+    datasets:[{label:'Días restantes',data:top15.map(x=>Math.max(0,x.dias)),backgroundColor:top15.map(x=>x.dias<=0?'#E11D48':x.dias<=30?'#F59E0B':x.dias<=90?'#3B82F6':'#10B981'),borderRadius:5,barThickness:20}]
+  },options:{...defaultOpts,indexAxis:'y',scales:{...defaultOpts.scales,x:{...defaultOpts.scales.x,ticks:{font:{size:10}}},y:{...defaultOpts.scales.y,ticks:{font:{size:9}}}}}});
 
   new Chart(document.getElementById('chartContratosPie'),{type:'doughnut',data:{labels:['Indeterminado','Plazo Fijo','Rec. Honorarios'],datasets:[{data:[indet,plazo,rh],backgroundColor:['#10B981','#3B82F6','#F59E0B'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
 
-  // Contratos table - next to expire
-  const now = new Date('2026-03-25');
-  const withDates = t.filter(x=>x.TERMINO!=='INDETERMINADO'&&x.TERMINO!=='N/A').map(x=>{
-    const d = new Date(x.TERMINO);
-    const diff = Math.ceil((d-now)/(1000*60*60*24));
-    return {...x,dias:diff,fecha:x.TERMINO};
-  }).sort((a,b)=>a.dias-b.dias);
-
-  let html='<table><thead><tr><th>#</th><th>Trabajador</th><th>Cargo</th><th>Término</th><th>Días Restantes</th><th>Estado</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Trabajador</th><th>Cargo</th><th>F. Ingreso</th><th>F. Término</th><th>Días Restantes</th><th>Estado</th></tr></thead><tbody>';
   withDates.forEach((x,i)=>{
-    const color = x.dias<=0?'badge-red':x.dias<=30?'badge-amber':x.dias<=90?'badge-blue':'badge-green';
-    const estado = x.dias<=0?'VENCIDO':x.dias<=30?'URGENTE':x.dias<=90?'PRÓXIMO':'VIGENTE';
-    html+=`<tr><td>${i+1}</td><td>${x.APENON}</td><td>${x.CARGO}</td><td>${x.fecha}</td><td style="font-weight:600">${x.dias}</td><td><span class="badge-sm ${color}">${estado}</span></td></tr>`;
+    const col=x.dias<=0?'badge-red':x.dias<=30?'badge-amber':x.dias<=90?'badge-blue':'badge-green';
+    const est=x.dias<=0?'VENCIDO':x.dias<=30?'URGENTE':x.dias<=90?'PRÓXIMO':'VIGENTE';
+    html+=`<tr><td>${i+1}</td><td style="font-weight:600">${x.APENON}</td><td>${x.CARGO}</td><td>${x.INGRESO}</td><td>${x.TERMINO}</td><td style="font-weight:700;text-align:center">${x.dias}</td><td><span class="badge-sm ${col}">${est}</span></td></tr>`;
   });
+  [indet,rh].forEach((n,ii)=>{if(n>0){const lbl=ii===0?'INDETERMINADO':'REC. HONORARIOS';html+=`<tr style="opacity:.6"><td colspan="5">${n} trabajador(es) con contrato ${lbl}</td><td>—</td><td><span class="badge-sm badge-green">VIGENTE</span></td></tr>`;}});
   html+='</tbody></table>';
   document.getElementById('tblContratos').innerHTML=html;
 })();
 
-// ============ TAB 8: ASISTENCIA ============
+// ============ ASISTENCIA ============
 (function(){
-  const a = DATA.asistencia;
-  const totP = a.reduce((s,x)=>s+x.puntual,0);
-  const totTard = a.reduce((s,x)=>s+x.tardanza,0);
-  const totTol = a.reduce((s,x)=>s+x.tolerancia,0);
-  const total = totP+totTard+totTol;
+  const sem=DATA.asistencia.semanas;
+  const per=DATA.asistencia.personas;
+  const totV=sem.reduce((s,x)=>s+x.puntual,0);
+  const totT=sem.reduce((s,x)=>s+x.tardanza,0);
+  const totA=sem.reduce((s,x)=>s+x.tolerancia,0);
+  const total=totV+totT+totA;
 
-  document.getElementById('asisKPIs').innerHTML =
-    makeKPI('','✅','green','% Puntualidad',pct(totP/total*100),totP+' registros')+
-    makeKPI('','🟡','amber','% Tolerancia',pct(totTol/total*100),totTol+' registros')+
-    makeKPI('','🔴','red','% Tardanza',pct(totTard/total*100),totTard+' registros');
+  document.getElementById('asisKPIs').innerHTML=
+    makeKPI('green','✅','% Puntualidad',pct(totV/total*100),totV+' registros de '+total)+
+    makeKPI('amber','🟡','% Tolerancia',pct(totA/total*100),totA+' registros')+
+    makeKPI('red','🔴','% Tardanza',pct(totT/total*100),totT+' registros');
 
-  new Chart(document.getElementById('chartAsis'),{type:'bar',data:{labels:a.map(x=>x.week),datasets:[
-    {label:'Puntual',data:a.map(x=>x.puntual),backgroundColor:'#10B981',borderRadius:4},
-    {label:'Tolerancia',data:a.map(x=>x.tolerancia),backgroundColor:'#F59E0B',borderRadius:4},
-    {label:'Tardanza',data:a.map(x=>x.tardanza),backgroundColor:'#E11D48',borderRadius:4}
-  ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,x:{...defaultOpts.scales.x,stacked:true},y:{...defaultOpts.scales.y,stacked:true}}}});
+  document.getElementById('semaforoCards').innerHTML=`
+    <div class="semaforo-card verde"><div class="semaforo-pct verde">${pct(totV/total*100)}</div><div class="semaforo-lbl verde">🟢 PUNTUAL</div><div class="semaforo-n">${totV} registros</div></div>
+    <div class="semaforo-card amarillo"><div class="semaforo-pct amarillo">${pct(totA/total*100)}</div><div class="semaforo-lbl amarillo">🟡 TOLERANCIA</div><div class="semaforo-n">${totA} registros</div></div>
+    <div class="semaforo-card rojo"><div class="semaforo-pct rojo">${pct(totT/total*100)}</div><div class="semaforo-lbl rojo">🔴 TARDANZA</div><div class="semaforo-n">${totT} registros</div></div>`;
 
-  new Chart(document.getElementById('chartAsisPie'),{type:'doughnut',data:{labels:['Puntual','Tolerancia','Tardanza'],datasets:[{data:[totP,totTol,totTard],backgroundColor:['#10B981','#F59E0B','#E11D48'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
+  new Chart(document.getElementById('chartAsis'),{type:'bar',data:{labels:sem.map(x=>x.week),datasets:[
+    {label:'Puntual',data:sem.map(x=>x.puntual),backgroundColor:'#10B981',borderRadius:4},
+    {label:'Tolerancia',data:sem.map(x=>x.tolerancia),backgroundColor:'#F59E0B',borderRadius:4},
+    {label:'Tardanza',data:sem.map(x=>x.tardanza),backgroundColor:'#E11D48',borderRadius:4}
+  ]},options:{...defaultOpts,plugins:{legend:{display:true,position:'top'}},scales:{...defaultOpts.scales,x:{stacked:true},y:{...defaultOpts.scales.y,stacked:true}}}});
 
-  let html='<table><thead><tr><th>Semana</th><th>Puntual</th><th>Tolerancia</th><th>Tardanza</th><th>Total</th><th>% Puntualidad</th><th>% Tolerancia</th><th>% Tardanza</th></tr></thead><tbody>';
-  a.forEach(x=>{
-    const tot=x.puntual+x.tolerancia+x.tardanza;
-    html+=`<tr><td>${x.week}</td><td>${x.puntual}</td><td>${x.tolerancia}</td><td>${x.tardanza}</td><td>${tot}</td><td><span class="badge-sm badge-green">${pct(x.puntual/tot*100)}</span></td><td><span class="badge-sm badge-amber">${pct(x.tolerancia/tot*100)}</span></td><td><span class="badge-sm badge-red">${pct(x.tardanza/tot*100)}</span></td></tr>`;
+  new Chart(document.getElementById('chartAsisPie'),{type:'doughnut',data:{labels:['Puntual','Tolerancia','Tardanza'],datasets:[{data:[totV,totA,totT],backgroundColor:['#10B981','#F59E0B','#E11D48'],borderWidth:0,cutout:'65%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}});
+
+  let html='<table><thead><tr><th>#</th><th>Trabajador</th><th>Días Reg.</th><th>Puntual ✅</th><th>Tardanza 🔴</th><th>Tolerancia 🟡</th><th>% Puntualidad</th><th>Estado</th></tr></thead><tbody>';
+  per.forEach((x,i)=>{
+    const pctV=Math.round(x.verde/x.dias*100);
+    const col=pctV>=80?'badge-green':pctV>=50?'badge-amber':'badge-red';
+    const est=pctV>=80?'BUENO':pctV>=50?'REGULAR':'MEJORAR';
+    html+=`<tr><td>${i+1}</td><td style="font-weight:600">${x.nombre}</td><td>${x.dias}</td><td style="color:#059669;font-weight:600">${x.verde}</td><td style="color:#E11D48;font-weight:600">${x.rojo}</td><td style="color:#D97706;font-weight:600">${x.amarillo}</td><td><span class="badge-sm ${col}">${pctV}%</span></td><td><span class="badge-sm ${col}">${est}</span></td></tr>`;
   });
-  const totRow = totP+totTol+totTard;
-  html+=`<tr style="background:#F0F2F8;font-weight:700"><td>TOTAL</td><td>${totP}</td><td>${totTol}</td><td>${totTard}</td><td>${totRow}</td><td><span class="badge-sm badge-green">${pct(totP/totRow*100)}</span></td><td><span class="badge-sm badge-amber">${pct(totTol/totRow*100)}</span></td><td><span class="badge-sm badge-red">${pct(totTard/totRow*100)}</span></td></tr>`;
+  const tv=per.reduce((s,x)=>s+x.verde,0),tr=per.reduce((s,x)=>s+x.rojo,0),ta=per.reduce((s,x)=>s+x.amarillo,0),td=per.reduce((s,x)=>s+x.dias,0);
+  html+=`<tr style="background:#F0F2F8;font-weight:700"><td colspan="2">TOTALES</td><td>${td}</td><td>${tv}</td><td>${tr}</td><td>${ta}</td><td><span class="badge-sm badge-green">${Math.round(tv/td*100)}%</span></td><td>—</td></tr>`;
   html+='</tbody></table>';
   document.getElementById('tblAsistencia').innerHTML=html;
 })();
